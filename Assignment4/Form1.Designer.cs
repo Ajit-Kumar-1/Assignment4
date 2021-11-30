@@ -181,6 +181,8 @@
             this.checkoutButton.TabIndex = 10;
             this.checkoutButton.Text = "Checkout";
             this.checkoutButton.UseVisualStyleBackColor = true;
+            this.checkoutButton.Visible = false;
+            this.checkoutButton.Click += new System.EventHandler(this.checkoutButton_Click);
             // 
             // buttonGroupBox
             // 
@@ -202,6 +204,7 @@
             this.exitButton.TabIndex = 14;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // salesReportButton
             // 
@@ -222,6 +225,7 @@
             this.stockReportButton.TabIndex = 13;
             this.stockReportButton.Text = "Display Stock Report";
             this.stockReportButton.UseVisualStyleBackColor = true;
+            this.stockReportButton.Click += new System.EventHandler(this.stockReportButton_Click);
             // 
             // searchGroupBox
             // 

@@ -34,6 +34,7 @@
             this.phoneTextBox = new System.Windows.Forms.TextBox();
             this.phoneLabel = new System.Windows.Forms.Label();
             this.emailTextBox = new System.Windows.Forms.TextBox();
+            this.checkoutButton = new System.Windows.Forms.Button();
             this.emailLabel = new System.Windows.Forms.Label();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.nameLabel = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@
             this.deleteItemButton = new System.Windows.Forms.Button();
             this.ItemTotalLabel = new System.Windows.Forms.Label();
             this.clearBasketButton = new System.Windows.Forms.Button();
-            this.checkoutButton = new System.Windows.Forms.Button();
             this.buttonGroupBox = new System.Windows.Forms.GroupBox();
             this.exitButton = new System.Windows.Forms.Button();
             this.salesReportButton = new System.Windows.Forms.Button();
@@ -129,6 +129,19 @@
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(520, 39);
             this.emailTextBox.TabIndex = 1;
+            // 
+            // checkoutButton
+            // 
+            this.checkoutButton.AutoSize = true;
+            this.checkoutButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.checkoutButton.Location = new System.Drawing.Point(329, 326);
+            this.checkoutButton.Name = "checkoutButton";
+            this.checkoutButton.Size = new System.Drawing.Size(172, 46);
+            this.checkoutButton.TabIndex = 3;
+            this.checkoutButton.Text = "&Checkout";
+            this.checkoutButton.UseVisualStyleBackColor = true;
+            this.checkoutButton.Visible = false;
+            this.checkoutButton.Click += new System.EventHandler(this.checkoutButton_Click);
             // 
             // emailLabel
             // 
@@ -254,19 +267,6 @@
             this.clearBasketButton.UseVisualStyleBackColor = true;
             this.clearBasketButton.Click += new System.EventHandler(this.clearBasketButton_Click);
             // 
-            // checkoutButton
-            // 
-            this.checkoutButton.AutoSize = true;
-            this.checkoutButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.checkoutButton.Location = new System.Drawing.Point(329, 326);
-            this.checkoutButton.Name = "checkoutButton";
-            this.checkoutButton.Size = new System.Drawing.Size(172, 46);
-            this.checkoutButton.TabIndex = 3;
-            this.checkoutButton.Text = "&Checkout";
-            this.checkoutButton.UseVisualStyleBackColor = true;
-            this.checkoutButton.Visible = false;
-            this.checkoutButton.Click += new System.EventHandler(this.checkoutButton_Click);
-            // 
             // buttonGroupBox
             // 
             this.buttonGroupBox.Controls.Add(this.exitButton);
@@ -334,6 +334,7 @@
             this.clearSearchButton.TabIndex = 6;
             this.clearSearchButton.Text = "C&lear Search";
             this.clearSearchButton.UseVisualStyleBackColor = true;
+            this.clearSearchButton.Click += new System.EventHandler(this.clearSearchButton_Click);
             // 
             // searchResultsLabel
             // 
@@ -362,6 +363,7 @@
             this.searchButton.TabIndex = 3;
             this.searchButton.Text = "&Search";
             this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // searchTextBox
             // 

@@ -80,19 +80,43 @@ namespace Assignment4
         // Alert message
         private const string ALERT_MESSAGE = "Alert";
 
+        // Error message
+        private const string ERROR_MESSAGE = "Error";
+
+        // Message indicating no results were found
+        private const string NO_RESULTS_FOUND_MESSAGE = "No results found";
+
         // Message segments for prompting confirmation of purchase
         private const string CHECKOUT_MESSAGE_PART_1 = "Do you confirm purchase of ";
         private const string CHECKOUT_MESSAGE_PART_2 = " item(s) for a total of ";
         private const string CHECKOUT_MESSAGE_PART_3 = "?";
 
-        // Item total prefix
+        // Prefix text for displaying item total
         private const string ITEM_TOTAL_PREFIX = "Item Total: ";
 
         // Items left suffix
         private const string LEFT_SUFFIX = " left";
 
-        // Prefix text for showing transaction ID
+        // Prefix text for displaying transaction ID
         private const string TRANSACTIONID_PREFIX = "Transaction ID: ";
+
+        // Prefix text for displaying name
+        private const string NAME_PREFIX = "Name: ";
+
+        // Prefix text for displaying date
+        private const string DATE_PREFIX = "Date: ";
+
+        // Prefix text for displaying email address
+        private const string EMAIL_PREFIX = "Email address: ";
+
+        // Prefix text for displaying phone number
+        private const string PHONE_PREFIX = "Phone number: ";
+
+        // Prefix text for displaying item count
+        private const string COUNT_PREFIX = "Item count: ";
+
+        // Prefix text for displaying items
+        private const string ITEMS_PREFIX = "Items: ";
 
         // Specify the characters used to generate a transaction ID
         private const string characterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -130,16 +154,16 @@ namespace Assignment4
         }
 
         // Variable to store transaction ID
-        private string transactionID = "";
+        private string transactionID = "-";
 
         // Variable to store name
-        private string name = "";
+        private string name = "-";
 
         // Variable to store email address
-        private string email = "";
+        private string email = "-";
 
         // Variable to store phone number
-        private string phone = "";
+        private string phone = "-";
 
         // Variable to track displayed item variants in the background
         private List<Tuple<string, decimal, int, int>> variants =
@@ -155,6 +179,7 @@ namespace Assignment4
         // Method to update stock
         private void updateStock(int index, int increment)
         {
+            // Replace the item in the list with the stock level adjusted
             ITEMS[index] = new Tuple<string, decimal, int, int>
                 (ITEMS[index].Item1, ITEMS[index].Item2, 
                 ITEMS[index].Item3 + increment, ITEMS[index].Item4);
@@ -163,9 +188,15 @@ namespace Assignment4
         // Method to generate a 10-character random string for transaction ID
         private string generateRandomString()
         {
+            // Initialize the output string
             string output = "";
+
+            // Loop code 10 times
             for (int i = 0; i < 10; i++)
+                // Add a random character from the character set
                 output += characterSet[random.Next(characterSet.Length)];
+
+            // This will be a transaction ID
             return output;
         }
 
@@ -437,7 +468,7 @@ namespace Assignment4
                     outputFile.WriteLine(total);
 
                     // Write item count
-                    outputFile.Write(basket.Count);
+                    outputFile.WriteLine(basket.Count);
 
                     // Form the string containing item IDs, comma-separated
                     string itemList = "";
@@ -452,21 +483,37 @@ namespace Assignment4
                     // Close file
                     outputFile.Close();
 
-                    // Empty the basket
-                    basketListBox.Items.Clear();
+                    // Empty basket
                     basket.Clear();
 
                     // Update item variants shown
                     loadVariants();
 
-                    // Hide the "Delete Item" button
-                    deleteItemButton.Hide();
-
-                    // Set item total to zero
+                    // Set values to default
                     total = 0.00M;
+                    name = "-";
+                    email = "-";
+                    phone = "-";
+
+                    // Prepare a new transaction ID
+                    transactionID = generateRandomString();
+
+                    // Display the new transaction ID
+                    transactionLabel.Text = transactionID;
+
+                    // Clear customer information
+                    nameTextBox.Clear();
+                    emailTextBox.Clear();
+                    phoneTextBox.Clear();
+
+                    // Empty basket
+                    basketListBox.Items.Clear();
 
                     // Display updated total
                     updateTotalDisplay();
+
+                    // Hide the "Delete Item" button
+                    deleteItemButton.Hide();
 
                     // Hide the "Checkout" button
                     checkoutButton.Hide();
@@ -491,6 +538,104 @@ namespace Assignment4
         {
             // Create a form to show stock details
             new StockReportForm().Show();
+        }
+
+        // Event handler called on pressing the "Clear Search" button
+        private void clearSearchButton_Click(object sender, EventArgs e)
+        {
+            // Clear search results
+            searchResultsListBox.Items.Clear();
+
+            // Clear search textbox
+            searchTextBox.Clear();
+
+            // Reset radio buttons to default
+            transactionIDRadioButton.Checked = true;
+
+        }
+
+        // Event handler called on pressing the "Search" button
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            // Clear the search results field
+            searchResultsListBox.Items.Clear();
+
+            // If search is by transaction ID
+            if(transactionIDRadioButton.Checked)
+                try
+                {
+                    // Open transaction record file
+                    StreamReader recordFile = File.OpenText(TRANSACTION_FILE_NAME);
+
+                    // Obtain searched transaction ID
+                    string searchedID = searchTextBox.Text.Trim();
+
+                    // Variable to check if a match was found
+                    Boolean matchFound = false;
+
+                    // Until end of file
+                    while (!recordFile.EndOfStream)
+                    {
+                        // Read the first line, which is supposed to be a record's transaction ID
+                        string? recordID = recordFile.ReadLine();
+                        if (recordID == searchedID)
+                        {
+                            // Note that a match was found
+                            matchFound = true;
+
+                            // Print the transaction ID
+                            searchResultsListBox.Items.Add(TRANSACTIONID_PREFIX + recordID);
+
+                            // Print the transaction date
+                            searchResultsListBox.Items.Add(DATE_PREFIX + recordFile.ReadLine());
+
+                            // Print the name associated with the record
+                            searchResultsListBox.Items.Add(NAME_PREFIX + recordFile.ReadLine());
+
+                            // Print the email address associated with the record
+                            searchResultsListBox.Items.Add(EMAIL_PREFIX + recordFile.ReadLine());
+
+                            // Print the phone number associated with the record
+                            searchResultsListBox.Items.Add(PHONE_PREFIX + recordFile.ReadLine());
+
+                            // Print the item total
+                            searchResultsListBox.Items.Add(ITEM_TOTAL_PREFIX + recordFile.ReadLine());
+
+                            // Print the item count
+                            searchResultsListBox.Items.Add(COUNT_PREFIX + recordFile.ReadLine());
+
+                            // Obtain the comma-separated list of item IDs
+                            string? itemIDList = recordFile.ReadLine();
+
+                            // Form an array of IDs
+                            var itemIDArray = itemIDList.Split(",");
+
+                            searchResultsListBox.Items.Add(ITEMS_PREFIX);
+
+                            // Iterate through each ID
+                            for (int i = 0; i < itemIDArray.Length - 1; i++)
+                                // Print item name
+                                searchResultsListBox.Items.Add(ITEMS[int.Parse(itemIDArray[i])].Item1 + "\n");
+
+                            // Quit searching
+                            break;
+                        }
+                        else
+                            // Skip the next 7 lines
+                            for (int i = 0; i < 7; i++)
+                                recordFile.ReadLine();
+                    }
+
+                    // In case of no match being found
+                    if (!matchFound)
+                        // Indicate such
+                        searchResultsListBox.Items.Add(NO_RESULTS_FOUND_MESSAGE);
+
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ERROR_MESSAGE, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
         }
     }
 }       

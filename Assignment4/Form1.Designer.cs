@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.customerInformationGroupBox = new System.Windows.Forms.GroupBox();
+            this.transactionLabel = new System.Windows.Forms.Label();
+            this.phoneTextBox = new System.Windows.Forms.TextBox();
+            this.phoneLabel = new System.Windows.Forms.Label();
+            this.emailTextBox = new System.Windows.Forms.TextBox();
+            this.emailLabel = new System.Windows.Forms.Label();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.nameLabel = new System.Windows.Forms.Label();
             this.itemSelectionGroupBox = new System.Windows.Forms.GroupBox();
             this.itemCategoryListBox = new System.Windows.Forms.ListBox();
             this.itemVariantListBox = new System.Windows.Forms.ListBox();
@@ -53,6 +61,7 @@
             this.transactionIDRadioButton = new System.Windows.Forms.RadioButton();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.mainPanel.SuspendLayout();
+            this.customerInformationGroupBox.SuspendLayout();
             this.itemSelectionGroupBox.SuspendLayout();
             this.basketGroupBox.SuspendLayout();
             this.buttonGroupBox.SuspendLayout();
@@ -62,14 +71,89 @@
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.customerInformationGroupBox);
             this.mainPanel.Controls.Add(this.itemSelectionGroupBox);
             this.mainPanel.Controls.Add(this.basketGroupBox);
             this.mainPanel.Controls.Add(this.buttonGroupBox);
             this.mainPanel.Controls.Add(this.searchGroupBox);
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1466, 1202);
+            this.mainPanel.Size = new System.Drawing.Size(1466, 1465);
             this.mainPanel.TabIndex = 0;
+            // 
+            // customerInformationGroupBox
+            // 
+            this.customerInformationGroupBox.Controls.Add(this.transactionLabel);
+            this.customerInformationGroupBox.Controls.Add(this.phoneTextBox);
+            this.customerInformationGroupBox.Controls.Add(this.phoneLabel);
+            this.customerInformationGroupBox.Controls.Add(this.emailTextBox);
+            this.customerInformationGroupBox.Controls.Add(this.checkoutButton);
+            this.customerInformationGroupBox.Controls.Add(this.emailLabel);
+            this.customerInformationGroupBox.Controls.Add(this.nameTextBox);
+            this.customerInformationGroupBox.Controls.Add(this.nameLabel);
+            this.customerInformationGroupBox.Location = new System.Drawing.Point(35, 1028);
+            this.customerInformationGroupBox.Name = "customerInformationGroupBox";
+            this.customerInformationGroupBox.Size = new System.Drawing.Size(867, 410);
+            this.customerInformationGroupBox.TabIndex = 2;
+            this.customerInformationGroupBox.TabStop = false;
+            this.customerInformationGroupBox.Text = "Customer Information";
+            // 
+            // transactionLabel
+            // 
+            this.transactionLabel.AutoSize = true;
+            this.transactionLabel.Location = new System.Drawing.Point(29, 64);
+            this.transactionLabel.Name = "transactionLabel";
+            this.transactionLabel.Size = new System.Drawing.Size(176, 32);
+            this.transactionLabel.TabIndex = 12;
+            this.transactionLabel.Text = "Transaction ID: ";
+            // 
+            // phoneTextBox
+            // 
+            this.phoneTextBox.Location = new System.Drawing.Point(115, 234);
+            this.phoneTextBox.Name = "phoneTextBox";
+            this.phoneTextBox.Size = new System.Drawing.Size(520, 39);
+            this.phoneTextBox.TabIndex = 2;
+            // 
+            // phoneLabel
+            // 
+            this.phoneLabel.AutoSize = true;
+            this.phoneLabel.Location = new System.Drawing.Point(29, 237);
+            this.phoneLabel.Name = "phoneLabel";
+            this.phoneLabel.Size = new System.Drawing.Size(87, 32);
+            this.phoneLabel.TabIndex = 6;
+            this.phoneLabel.Text = "Phone:";
+            // 
+            // emailTextBox
+            // 
+            this.emailTextBox.Location = new System.Drawing.Point(115, 178);
+            this.emailTextBox.Name = "emailTextBox";
+            this.emailTextBox.Size = new System.Drawing.Size(520, 39);
+            this.emailTextBox.TabIndex = 1;
+            // 
+            // emailLabel
+            // 
+            this.emailLabel.AutoSize = true;
+            this.emailLabel.Location = new System.Drawing.Point(29, 181);
+            this.emailLabel.Name = "emailLabel";
+            this.emailLabel.Size = new System.Drawing.Size(83, 32);
+            this.emailLabel.TabIndex = 5;
+            this.emailLabel.Text = "Email: ";
+            // 
+            // nameTextBox
+            // 
+            this.nameTextBox.Location = new System.Drawing.Point(115, 118);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(520, 39);
+            this.nameTextBox.TabIndex = 0;
+            // 
+            // nameLabel
+            // 
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(29, 121);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(90, 32);
+            this.nameLabel.TabIndex = 4;
+            this.nameLabel.Text = "Name: ";
             // 
             // itemSelectionGroupBox
             // 
@@ -79,7 +163,7 @@
             this.itemSelectionGroupBox.Location = new System.Drawing.Point(34, 34);
             this.itemSelectionGroupBox.Name = "itemSelectionGroupBox";
             this.itemSelectionGroupBox.Size = new System.Drawing.Size(868, 628);
-            this.itemSelectionGroupBox.TabIndex = 15;
+            this.itemSelectionGroupBox.TabIndex = 0;
             this.itemSelectionGroupBox.TabStop = false;
             this.itemSelectionGroupBox.Text = "Select item";
             // 
@@ -100,17 +184,17 @@
             this.itemVariantListBox.Location = new System.Drawing.Point(188, 52);
             this.itemVariantListBox.Name = "itemVariantListBox";
             this.itemVariantListBox.Size = new System.Drawing.Size(650, 484);
-            this.itemVariantListBox.TabIndex = 3;
+            this.itemVariantListBox.TabIndex = 1;
             this.itemVariantListBox.SelectedIndexChanged += new System.EventHandler(this.itemVariantListBox_SelectedIndexChanged);
             // 
             // addToBasketButton
             // 
             this.addToBasketButton.AutoSize = true;
-            this.addToBasketButton.Location = new System.Drawing.Point(666, 560);
+            this.addToBasketButton.Location = new System.Drawing.Point(632, 561);
             this.addToBasketButton.Name = "addToBasketButton";
             this.addToBasketButton.Size = new System.Drawing.Size(172, 46);
-            this.addToBasketButton.TabIndex = 4;
-            this.addToBasketButton.Text = "Add to basket";
+            this.addToBasketButton.TabIndex = 2;
+            this.addToBasketButton.Text = "&Add to basket";
             this.addToBasketButton.UseVisualStyleBackColor = true;
             this.addToBasketButton.Visible = false;
             this.addToBasketButton.Click += new System.EventHandler(this.addToBasketButton_Click);
@@ -121,11 +205,10 @@
             this.basketGroupBox.Controls.Add(this.deleteItemButton);
             this.basketGroupBox.Controls.Add(this.ItemTotalLabel);
             this.basketGroupBox.Controls.Add(this.clearBasketButton);
-            this.basketGroupBox.Controls.Add(this.checkoutButton);
             this.basketGroupBox.Location = new System.Drawing.Point(34, 668);
             this.basketGroupBox.Name = "basketGroupBox";
             this.basketGroupBox.Size = new System.Drawing.Size(868, 354);
-            this.basketGroupBox.TabIndex = 14;
+            this.basketGroupBox.TabIndex = 1;
             this.basketGroupBox.TabStop = false;
             this.basketGroupBox.Text = "Basket";
             // 
@@ -136,7 +219,7 @@
             this.basketListBox.Location = new System.Drawing.Point(30, 54);
             this.basketListBox.Name = "basketListBox";
             this.basketListBox.Size = new System.Drawing.Size(522, 260);
-            this.basketListBox.TabIndex = 5;
+            this.basketListBox.TabIndex = 0;
             this.basketListBox.SelectedIndexChanged += new System.EventHandler(this.basketListBox_SelectedIndexChanged);
             // 
             // deleteItemButton
@@ -145,8 +228,8 @@
             this.deleteItemButton.Location = new System.Drawing.Point(632, 131);
             this.deleteItemButton.Name = "deleteItemButton";
             this.deleteItemButton.Size = new System.Drawing.Size(172, 46);
-            this.deleteItemButton.TabIndex = 7;
-            this.deleteItemButton.Text = "Delete Item";
+            this.deleteItemButton.TabIndex = 2;
+            this.deleteItemButton.Text = "&Delete Item";
             this.deleteItemButton.UseVisualStyleBackColor = true;
             this.deleteItemButton.Visible = false;
             this.deleteItemButton.Click += new System.EventHandler(this.deleteItemButton_Click);
@@ -157,7 +240,7 @@
             this.ItemTotalLabel.Location = new System.Drawing.Point(577, 215);
             this.ItemTotalLabel.Name = "ItemTotalLabel";
             this.ItemTotalLabel.Size = new System.Drawing.Size(132, 32);
-            this.ItemTotalLabel.TabIndex = 11;
+            this.ItemTotalLabel.TabIndex = 3;
             this.ItemTotalLabel.Text = "Item Total: ";
             // 
             // clearBasketButton
@@ -166,8 +249,8 @@
             this.clearBasketButton.Location = new System.Drawing.Point(632, 64);
             this.clearBasketButton.Name = "clearBasketButton";
             this.clearBasketButton.Size = new System.Drawing.Size(172, 46);
-            this.clearBasketButton.TabIndex = 8;
-            this.clearBasketButton.Text = "Clear Basket";
+            this.clearBasketButton.TabIndex = 1;
+            this.clearBasketButton.Text = "Clear &Basket";
             this.clearBasketButton.UseVisualStyleBackColor = true;
             this.clearBasketButton.Click += new System.EventHandler(this.clearBasketButton_Click);
             // 
@@ -175,11 +258,11 @@
             // 
             this.checkoutButton.AutoSize = true;
             this.checkoutButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.checkoutButton.Location = new System.Drawing.Point(632, 268);
+            this.checkoutButton.Location = new System.Drawing.Point(329, 326);
             this.checkoutButton.Name = "checkoutButton";
             this.checkoutButton.Size = new System.Drawing.Size(172, 46);
-            this.checkoutButton.TabIndex = 10;
-            this.checkoutButton.Text = "Checkout";
+            this.checkoutButton.TabIndex = 3;
+            this.checkoutButton.Text = "&Checkout";
             this.checkoutButton.UseVisualStyleBackColor = true;
             this.checkoutButton.Visible = false;
             this.checkoutButton.Click += new System.EventHandler(this.checkoutButton_Click);
@@ -189,41 +272,40 @@
             this.buttonGroupBox.Controls.Add(this.exitButton);
             this.buttonGroupBox.Controls.Add(this.salesReportButton);
             this.buttonGroupBox.Controls.Add(this.stockReportButton);
-            this.buttonGroupBox.Location = new System.Drawing.Point(34, 1028);
+            this.buttonGroupBox.Location = new System.Drawing.Point(922, 1174);
             this.buttonGroupBox.Name = "buttonGroupBox";
-            this.buttonGroupBox.Size = new System.Drawing.Size(868, 140);
-            this.buttonGroupBox.TabIndex = 12;
+            this.buttonGroupBox.Size = new System.Drawing.Size(512, 264);
+            this.buttonGroupBox.TabIndex = 4;
             this.buttonGroupBox.TabStop = false;
+            this.buttonGroupBox.Text = "Actions";
             // 
             // exitButton
             // 
             this.exitButton.AutoSize = true;
-            this.exitButton.Location = new System.Drawing.Point(647, 52);
+            this.exitButton.Location = new System.Drawing.Point(179, 180);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(172, 46);
-            this.exitButton.TabIndex = 14;
-            this.exitButton.Text = "Exit";
+            this.exitButton.TabIndex = 2;
+            this.exitButton.Text = "&Exit";
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // salesReportButton
             // 
-            this.salesReportButton.AutoSize = true;
-            this.salesReportButton.Location = new System.Drawing.Point(46, 52);
+            this.salesReportButton.Location = new System.Drawing.Point(38, 54);
             this.salesReportButton.Name = "salesReportButton";
-            this.salesReportButton.Size = new System.Drawing.Size(259, 46);
-            this.salesReportButton.TabIndex = 14;
-            this.salesReportButton.Text = "Generate Sales Report";
+            this.salesReportButton.Size = new System.Drawing.Size(197, 91);
+            this.salesReportButton.TabIndex = 0;
+            this.salesReportButton.Text = "&Generate Sales Report";
             this.salesReportButton.UseVisualStyleBackColor = true;
             // 
             // stockReportButton
             // 
-            this.stockReportButton.AutoSize = true;
-            this.stockReportButton.Location = new System.Drawing.Point(342, 52);
+            this.stockReportButton.Location = new System.Drawing.Point(277, 54);
             this.stockReportButton.Name = "stockReportButton";
-            this.stockReportButton.Size = new System.Drawing.Size(259, 46);
-            this.stockReportButton.TabIndex = 13;
-            this.stockReportButton.Text = "Display Stock Report";
+            this.stockReportButton.Size = new System.Drawing.Size(197, 91);
+            this.stockReportButton.TabIndex = 1;
+            this.stockReportButton.Text = "D&isplay Stock Report";
             this.stockReportButton.UseVisualStyleBackColor = true;
             this.stockReportButton.Click += new System.EventHandler(this.stockReportButton_Click);
             // 
@@ -239,7 +321,7 @@
             this.searchGroupBox.Location = new System.Drawing.Point(922, 34);
             this.searchGroupBox.Name = "searchGroupBox";
             this.searchGroupBox.Size = new System.Drawing.Size(512, 1134);
-            this.searchGroupBox.TabIndex = 9;
+            this.searchGroupBox.TabIndex = 3;
             this.searchGroupBox.TabStop = false;
             this.searchGroupBox.Text = "Search";
             // 
@@ -249,8 +331,8 @@
             this.clearSearchButton.Location = new System.Drawing.Point(302, 53);
             this.clearSearchButton.Name = "clearSearchButton";
             this.clearSearchButton.Size = new System.Drawing.Size(172, 46);
-            this.clearSearchButton.TabIndex = 15;
-            this.clearSearchButton.Text = "Clear Search";
+            this.clearSearchButton.TabIndex = 6;
+            this.clearSearchButton.Text = "C&lear Search";
             this.clearSearchButton.UseVisualStyleBackColor = true;
             // 
             // searchResultsLabel
@@ -259,7 +341,7 @@
             this.searchResultsLabel.Location = new System.Drawing.Point(38, 219);
             this.searchResultsLabel.Name = "searchResultsLabel";
             this.searchResultsLabel.Size = new System.Drawing.Size(166, 32);
-            this.searchResultsLabel.TabIndex = 14;
+            this.searchResultsLabel.TabIndex = 4;
             this.searchResultsLabel.Text = "Search Results";
             // 
             // searchResultsListBox
@@ -269,7 +351,7 @@
             this.searchResultsListBox.Location = new System.Drawing.Point(38, 254);
             this.searchResultsListBox.Name = "searchResultsListBox";
             this.searchResultsListBox.Size = new System.Drawing.Size(436, 836);
-            this.searchResultsListBox.TabIndex = 13;
+            this.searchResultsListBox.TabIndex = 5;
             // 
             // searchButton
             // 
@@ -277,8 +359,8 @@
             this.searchButton.Location = new System.Drawing.Point(302, 147);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(172, 46);
-            this.searchButton.TabIndex = 12;
-            this.searchButton.Text = "Search";
+            this.searchButton.TabIndex = 3;
+            this.searchButton.Text = "&Search";
             this.searchButton.UseVisualStyleBackColor = true;
             // 
             // searchTextBox
@@ -319,11 +401,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1463, 1201);
+            this.ClientSize = new System.Drawing.Size(1463, 1463);
             this.Controls.Add(this.mainPanel);
             this.Name = "Form1";
             this.Text = ",";
             this.mainPanel.ResumeLayout(false);
+            this.customerInformationGroupBox.ResumeLayout(false);
+            this.customerInformationGroupBox.PerformLayout();
             this.itemSelectionGroupBox.ResumeLayout(false);
             this.itemSelectionGroupBox.PerformLayout();
             this.basketGroupBox.ResumeLayout(false);
@@ -363,5 +447,13 @@
         private FileSystemWatcher fileSystemWatcher1;
         private GroupBox itemSelectionGroupBox;
         private Button clearSearchButton;
+        private GroupBox customerInformationGroupBox;
+        private Label transactionLabel;
+        private TextBox phoneTextBox;
+        private Label phoneLabel;
+        private TextBox emailTextBox;
+        private Label emailLabel;
+        private TextBox nameTextBox;
+        private Label nameLabel;
     }
 }

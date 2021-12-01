@@ -91,6 +91,24 @@ namespace Assignment4
         // Items left suffix
         private const string LEFT_SUFFIX = " left";
 
+        // Prefix text for showing transaction ID
+        private const string TRANSACTIONID_PREFIX = "Transaction ID: ";
+
+        // Specify the characters used to generate a transaction ID
+        private const string characterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        // Format for storing and displaying date
+        private const string DATE_FORMAT = "dd/MM/yyyy";
+
+        // Random object used for generating transaction ID
+        private Random random = new Random();
+
+        // File name for transaction record file
+        private const string TRANSACTION_FILE_NAME = "../transactions.txt";
+
+        // File name for stock record file
+        private const string STOCK_FILE_NAME = "../stock.txt";
+
         // Method to update the displayed basket total
         private void updateTotalDisplay()
         {
@@ -111,6 +129,18 @@ namespace Assignment4
             return item.Item1 + item.Item2.ToString("C");
         }
 
+        // Variable to store transaction ID
+        private string transactionID = "";
+
+        // Variable to store name
+        private string name = "";
+
+        // Variable to store email address
+        private string email = "";
+
+        // Variable to store phone number
+        private string phone = "";
+
         // Variable to track displayed item variants in the background
         private List<Tuple<string, decimal, int, int>> variants =
             new List<Tuple<string, decimal, int, int>>();
@@ -130,6 +160,15 @@ namespace Assignment4
                 ITEMS[index].Item3 + increment, ITEMS[index].Item4);
         }
 
+        // Method to generate a 10-character random string for transaction ID
+        private string generateRandomString()
+        {
+            string output = "";
+            for (int i = 0; i < 10; i++)
+                output += characterSet[random.Next(characterSet.Length)];
+            return output;
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -140,10 +179,16 @@ namespace Assignment4
 
             // Start with item total of zero
             updateTotalDisplay();
+
+            // Generate and set a new transaction ID
+            transactionID = generateRandomString();
+
+            // Display the transaction ID
+            transactionLabel.Text = TRANSACTIONID_PREFIX + transactionID;
         }
 
         // Method to display item variants in list box and keep a list in the background
-        void loadVariants()
+        private void loadVariants()
         {
             // Clearing existing list of item variants
             itemVariantListBox.Items.Clear();
@@ -368,28 +413,70 @@ namespace Assignment4
 
             // If user clicks "Yes"
             if(result == DialogResult.Yes)
-            {
-                // Write transaction to file
+                try
+                {
+                    // Open transaction record file
+                    StreamWriter outputFile = File.AppendText(TRANSACTION_FILE_NAME);
 
-                // Empty the basket
-                basketListBox.Items.Clear();
-                basket.Clear();
+                    // Write transaction ID
+                    outputFile.WriteLine(transactionID);
 
-                // Update item variants shown
-                loadVariants();
+                    // Write current date
+                    outputFile.WriteLine(DateTime.Today.ToString(DATE_FORMAT));
 
-                // Hide the "Delete Item" button
-                deleteItemButton.Hide();
+                    // Write name
+                    outputFile.WriteLine(name);
 
-                // Set item total to zero
-                total = 0.00M;
+                    // Write email address
+                    outputFile.WriteLine(email);
 
-                // Display updated total
-                updateTotalDisplay();
+                    // Write phone number
+                    outputFile.WriteLine(phone);
 
-                // Hide the "Checkout" button
-                checkoutButton.Hide();
-            }
+                    // Write item total
+                    outputFile.WriteLine(total);
+
+                    // Write item count
+                    outputFile.Write(basket.Count);
+
+                    // Form the string containing item IDs, comma-separated
+                    string itemList = "";
+
+                    // Add item IDs to string
+                    foreach (Tuple<string, decimal, int, int> item in basket)
+                        itemList += item.Item4 + ",";
+
+                    // Write the string
+                    outputFile.WriteLine(itemList);
+
+                    // Close file
+                    outputFile.Close();
+
+                    // Empty the basket
+                    basketListBox.Items.Clear();
+                    basket.Clear();
+
+                    // Update item variants shown
+                    loadVariants();
+
+                    // Hide the "Delete Item" button
+                    deleteItemButton.Hide();
+
+                    // Set item total to zero
+                    total = 0.00M;
+
+                    // Display updated total
+                    updateTotalDisplay();
+
+                    // Hide the "Checkout" button
+                    checkoutButton.Hide();
+
+                }
+                catch (Exception ex)
+                {
+                    // Show error message from exception thrown
+                    MessageBox.Show(ex.Message);
+                }
         }
 
         // Event handler called on pressing the "Exit" button

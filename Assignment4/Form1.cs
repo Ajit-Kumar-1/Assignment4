@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
+
 namespace Assignment4
 {
     public partial class Form1 : Form
@@ -5,67 +8,70 @@ namespace Assignment4
         // List of items
         private static Tuple<string, decimal, int, int>[] ITEMS = 
             new Tuple<string, decimal, int, int>[60] { 
-            new Tuple<string, decimal, int, int>("Compact Laptop (Silver)       ", 1129, 2, 0),
-            new Tuple<string, decimal, int, int>("Compact Laptop (Grey)         ", 1129, 2, 1),
-            new Tuple<string, decimal, int, int>("Compact Laptop (Gold)         ", 1129, 2, 2),
-            new Tuple<string, decimal, int, int>("Regular Laptop (Silver)       ", 2249, 2, 3),
-            new Tuple<string, decimal, int, int>("Regular Laptop (Grey)         ", 2249, 2, 4),
-            new Tuple<string, decimal, int, int>("Big Laptop (Silver)           ", 2749, 2, 5),
-            new Tuple<string, decimal, int, int>("Big Laptop (Grey)             ", 2749, 2, 6),
-            new Tuple<string, decimal, int, int>("Small Desktop (Silver)        ", 799, 2, 7),
-            new Tuple<string, decimal, int, int>("Small Desktop (Grey)          ", 799, 2, 8),
-            new Tuple<string, decimal, int, int>("All-in-one Desktop (Blue)     ", 1499, 2, 9),
-            new Tuple<string, decimal, int, int>("All-in-one Desktop (Green)    ", 1499, 2, 10),
-            new Tuple<string, decimal, int, int>("All-in-one Desktop (Pink)     ", 1499, 2, 11),
-            new Tuple<string, decimal, int, int>("All-in-one Desktop (Silver)   ", 1499, 2, 12),
-            new Tuple<string, decimal, int, int>("All-in-one Desktop (Yellow)   ", 1499, 2, 13),
-            new Tuple<string, decimal, int, int>("All-in-one Desktop (Orange)   ", 1499, 2, 14),
-            new Tuple<string, decimal, int, int>("All-in-one Desktop (Purple)   ", 1499, 2, 15),
-            new Tuple<string, decimal, int, int>("Big powerful tablet (Silver)  ", 1229, 2, 16),
-            new Tuple<string, decimal, int, int>("Big powerful tablet (Grey)    ", 1229, 2, 17),
-            new Tuple<string, decimal, int, int>("Powerful tablet (Silver)      ", 909, 2, 18),
-            new Tuple<string, decimal, int, int>("Powerful tablet (Grey)        ", 909, 2, 19),
-            new Tuple<string, decimal, int, int>("Regular tablet (Grey)         ", 679, 2, 20),
-            new Tuple<string, decimal, int, int>("Regular tablet (Silver)       ", 679, 2, 21),
-            new Tuple<string, decimal, int, int>("Regular tablet (Pink)         ", 679, 2, 22),
-            new Tuple<string, decimal, int, int>("Regular tablet (Green)        ", 679, 2, 23),
-            new Tuple<string, decimal, int, int>("Regular tablet (Blue)         ", 679, 2, 24),
-            new Tuple<string, decimal, int, int>("Compact tablet (Grey)         ", 569, 2, 25),
-            new Tuple<string, decimal, int, int>("Compact tablet (Pink)         ", 569, 2, 26),
-            new Tuple<string, decimal, int, int>("Compact tablet (Purple)       ", 569, 2, 27),
-            new Tuple<string, decimal, int, int>("Compact tablet (White)        ", 569, 2, 28),
-            new Tuple<string, decimal, int, int>("Basic tablet (Silver)         ", 369, 2, 29),
-            new Tuple<string, decimal, int, int>("Basic tablet (Grey)           ", 369, 2, 30),
-            new Tuple<string, decimal, int, int>("Compact phone (White)         ", 499, 2, 31),
-            new Tuple<string, decimal, int, int>("Compact phone (Black)         ", 499, 2, 32),
-            new Tuple<string, decimal, int, int>("Compact phone (Red)           ", 499, 2, 33),
-            new Tuple<string, decimal, int, int>("Small phone (White)           ", 829, 2, 34),
-            new Tuple<string, decimal, int, int>("Small phone (Black)           ", 829, 2, 35),
-            new Tuple<string, decimal, int, int>("Small phone (Red)             ", 829, 2, 36),
-            new Tuple<string, decimal, int, int>("Small phone (Blue)            ", 829, 2, 37),
-            new Tuple<string, decimal, int, int>("Small phone (Pink)            ", 829, 2, 38),
-            new Tuple<string, decimal, int, int>("Regular phone (White)         ", 929, 2, 39),
-            new Tuple<string, decimal, int, int>("Regular phone (Black)         ", 929, 2, 40),
-            new Tuple<string, decimal, int, int>("Regular phone (Red)           ", 929, 2, 41),
-            new Tuple<string, decimal, int, int>("Regular phone (Blue)          ", 929, 2, 42),
-            new Tuple<string, decimal, int, int>("Regular phone (Pink)          ", 929, 2, 43),
-            new Tuple<string, decimal, int, int>("Large phone (Silver)          ", 1279, 2, 44),
-            new Tuple<string, decimal, int, int>("Large phone (Grey)            ", 1279, 2, 45),
-            new Tuple<string, decimal, int, int>("Large phone (Gold)            ", 1279, 2, 46),
-            new Tuple<string, decimal, int, int>("Large phone (Blue)            ", 1279, 2, 47),
-            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (White)      ", 429, 2, 48),
-            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Black)      ", 429, 2, 49),
-            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Green)      ", 429, 2, 50),
-            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Blue)       ", 429, 2, 51),
-            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Red)        ", 429, 2, 52),
-            new Tuple<string, decimal, int, int>("Smartwatch (L) (White)        ", 459, 2, 53),
-            new Tuple<string, decimal, int, int>("Smartwatch (L) (Black)        ", 459, 2, 54),
-            new Tuple<string, decimal, int, int>("Smartwatch (L) (Green)        ", 459, 2, 55),
-            new Tuple<string, decimal, int, int>("Smartwatch (L) (Blue)         ", 459, 2, 56),
-            new Tuple<string, decimal, int, int>("Smartwatch (L) (Red)          ", 459, 2, 57),
-            new Tuple<string, decimal, int, int>("In-ear Headphones             ", 199, 2, 58),
-            new Tuple<string, decimal, int, int>("In-ear Headphones with ANC    ", 279, 2, 59),
+            new Tuple<string, decimal, int, int>("Compact Laptop (Silver)", 1129, 2, 0),
+            new Tuple<string, decimal, int, int>("Compact Laptop (Grey)", 1129, 2, 1),
+            new Tuple<string, decimal, int, int>("Compact Laptop (Gold)", 1129, 2, 2),
+            new Tuple<string, decimal, int, int>("Regular Laptop (Silver)", 2249, 2, 3),
+            new Tuple<string, decimal, int, int>("Regular Laptop (Grey)", 2249, 2, 4),
+            new Tuple<string, decimal, int, int>("Big Laptop (Silver)", 2749, 2, 5),
+            new Tuple<string, decimal, int, int>("Big Laptop (Grey)", 2749, 2, 6),
+            new Tuple<string, decimal, int, int>("Small Desktop (Silver)", 799, 2, 7),
+            new Tuple<string, decimal, int, int>("Small Desktop (Grey)", 799, 2, 8),
+            new Tuple<string, decimal, int, int>("All-in-one Desktop (Blue)", 1499, 2, 9),
+            new Tuple<string, decimal, int, int>("All-in-one Desktop (Green)", 1499, 2, 10),
+            new Tuple<string, decimal, int, int>("All-in-one Desktop (Pink)", 1499, 2, 11),
+            new Tuple<string, decimal, int, int>("All-in-one Desktop (Silver)", 1499, 2, 12),
+            new Tuple<string, decimal, int, int>("All-in-one Desktop (Yellow)", 1499, 2, 13),
+            new Tuple<string, decimal, int, int>("All-in-one Desktop (Orange)", 1499, 2, 14),
+            new Tuple<string, decimal, int, int>("All-in-one Desktop (Purple)", 1499, 2, 15),
+            new Tuple<string, decimal, int, int>("Big powerful tablet (Silver)", 1229, 2, 16),
+            new Tuple<string, decimal, int, int>("Big powerful tablet (Grey)", 1229, 2, 17),
+            new Tuple<string, decimal, int, int>("Powerful tablet (Silver)", 909, 2, 18),
+            new Tuple<string, decimal, int, int>("Powerful tablet (Grey)", 909, 2, 19),
+            new Tuple<string, decimal, int, int>("Regular tablet (Grey)", 679, 2, 20),
+            new Tuple<string, decimal, int, int>("Regular tablet (Silver)", 679, 2, 21),
+            new Tuple<string, decimal, int, int>("Regular tablet (Pink)", 679, 2, 22),
+            new Tuple<string, decimal, int, int>("Regular tablet (Green)", 679, 2, 23),
+            new Tuple<string, decimal, int, int>("Regular tablet (Blue)", 679, 2, 24),
+            new Tuple<string, decimal, int, int>("Compact tablet (Grey)", 569, 2, 25),
+            new Tuple<string, decimal, int, int>("Compact tablet (Pink)", 569, 2, 26),
+            new Tuple<string, decimal, int, int>("Compact tablet (Purple)", 569, 2, 27),
+            new Tuple<string, decimal, int, int>("Compact tablet (White)", 569, 2, 28),
+            new Tuple<string, decimal, int, int>("Basic tablet (Silver)", 369, 2, 29),
+            new Tuple<string, decimal, int, int>("Basic tablet (Grey)", 369, 2, 30),
+            new Tuple<string, decimal, int, int>("Compact phone (White)", 499, 2, 31),
+            new Tuple<string, decimal, int, int>("Compact phone (Black)", 499, 2, 32),
+            new Tuple<string, decimal, int, int>("Compact phone (Red)", 499, 2, 33),
+            new Tuple<string, decimal, int, int>("Small phone (White)", 829, 2, 34),
+            new Tuple<string, decimal, int, int>("Small phone (Black)", 829, 2, 35),
+            new Tuple<string, decimal, int, int>("Small phone (Red)", 829, 2, 36),
+            new Tuple<string, decimal, int, int>("Small phone (Blue)", 829, 2, 37),
+            new Tuple<string, decimal, int, int>("Small phone (Pink)", 829, 2, 38),
+            new Tuple<string, decimal, int, int>("Regular phone (White)", 929, 2, 39),
+            new Tuple<string, decimal, int, int>("Regular phone (Black)", 929, 2, 40),
+            new Tuple<string, decimal, int, int>("Regular phone (Red)", 929, 2, 41),
+            new Tuple<string, decimal, int, int>("Regular phone (Blue)", 929, 2, 42),
+            new Tuple<string, decimal, int, int>("Regular phone (Pink)", 929, 2, 43),
+            new Tuple<string, decimal, int, int>("Large phone (Silver)", 1279, 2, 44),
+            new Tuple<string, decimal, int, int>("Large phone (Grey)", 1279, 2, 45),
+            new Tuple<string, decimal, int, int>("Large phone (Gold)", 1279, 2, 46),
+            new Tuple<string, decimal, int, int>("Large phone (Blue)", 1279, 2, 47),
+            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (White)", 429, 2, 48),
+            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Black)", 429, 2, 49),
+            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Green)", 429, 2, 50),
+            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Blue)", 429, 2, 51),
+            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Red)", 429, 2, 52),
+            new Tuple<string, decimal, int, int>("Smartwatch (L) (White)", 459, 2, 53),
+            new Tuple<string, decimal, int, int>("Smartwatch (L) (Black)", 459, 2, 54),
+            new Tuple<string, decimal, int, int>("Smartwatch (L) (Green)", 459, 2, 55),
+            new Tuple<string, decimal, int, int>("Smartwatch (L) (Blue)", 459, 2, 56),
+            new Tuple<string, decimal, int, int>("Smartwatch (L) (Red)", 459, 2, 57),
+            new Tuple<string, decimal, int, int>("In-ear Headphones", 199, 2, 58),
+            new Tuple<string, decimal, int, int>("In-ear Headphones with ANC", 279, 2, 59),
         };
+
+        // Variable to track stock levels at the start of the day
+        private Tuple<string, decimal, int, int>[] originalItems = ITEMS;
 
         // List of item categories
         private string[] CATEGORIES = new string[6] {
@@ -83,8 +89,29 @@ namespace Assignment4
         // Error message
         private const string ERROR_MESSAGE = "Error";
 
+        // Message indicating that nothing was entered to search
+        private const string NO_SEARCH_TERM_MESSAGE = "Please enter a value to search by";
+
         // Message indicating no results were found
         private const string NO_RESULTS_FOUND_MESSAGE = "No results found";
+
+        // Message reqeusting that a name be entered
+        private const string ENTER_NAME_MESSAGE = "Name is empty. Please enter a name";
+
+        // Message requesting that an email address be entered
+        private const string ENTER_EMAIL_MESSAGE = 
+            "Email address is empty. Please enter a valid email address";
+
+        // Message requesting that a valid email address be entered
+        private const string ENTER_VALID_EMAIL_MESSAGE =
+            "Entered email address is invalid. Please enter a valid email address";
+
+        // Message requesting that a phone number be entered
+        private const string ENTER_PHONE_NUMBER_MESSAGE =
+            "Phone number is empty. Please enter a valid phone number";
+        // Message requesting that a valid phone number be entered
+        private const string ENTER_VALID_PHONE_MESSAGE =
+            "Entered phone number is invalid. Please enter a valid phone number";
 
         // Message segments for prompting confirmation of purchase
         private const string CHECKOUT_MESSAGE_PART_1 = "Do you confirm purchase of ";
@@ -118,6 +145,36 @@ namespace Assignment4
         // Prefix text for displaying items
         private const string ITEMS_PREFIX = "Items: ";
 
+        // Tooltip message displayed on pressing the "Add to basket" button
+        private const string ADD_TO_BASKET_TOOLTIP =  "Add the selected item to basket";
+
+        // Tooltip message displayed on pressing the "Clear basket" button
+        private const string CLEAR_BASKET_TOOLTIP = "Return items in basket to stock";
+
+        // Tooltip message displayed on pressing the "Delete Item" button
+        private const string DELETE_ITEM_TOOLTIP = "Remove the selected item from basket";
+
+        // Tooltip message displayed on pressing the "Checkout" button
+        private const string CHECKOUT_TOOLTIP = "Checkout selected items";
+
+        // Tooltip message displayed on pressing the "Clear Search" button
+        private const string CLEAR_SEARCH_TOOLTIP = "Clear search results and searched term";
+
+        // Tooltip message displayed on pressing the "Search" button
+        private const string SEARCH_TOOLTIP = 
+            "Search file for transactions matching given ID/Date";
+
+        // Tooltip message displayed on pressing the "Generate Sales Report" button
+        private const string GENERATE_SALES_REPORT_TOOLTIP =
+            "Generate a report for daily sales of all items and save to file";
+
+        // Tooltip message displayed on pressing the "Display Stock Report" button
+        private const string DISPLAY_STOCK_REPORT_TOOLTIP =
+            "Display in a new window a report on stock levels of all items";
+
+        // Tooltip message displayed on pressing the "Exit" button
+        private const string EXIT_TOOLTIP = "Exit the application";
+
         // Specify the characters used to generate a transaction ID
         private const string characterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -136,6 +193,7 @@ namespace Assignment4
         // Method to update the displayed basket total
         private void updateTotalDisplay()
         {
+            // Display "Item Total: " followed by the amount as currency
             ItemTotalLabel.Text = ITEM_TOTAL_PREFIX + total.ToString("C");
         }
 
@@ -143,7 +201,8 @@ namespace Assignment4
         private static string itemVariant(int index)
         {
             Tuple<string, decimal, int, int> item = ITEMS[index];
-            return item.Item1 + item.Item2.ToString("C") + " " + item.Item3 + LEFT_SUFFIX;
+            return item.Item1 + item.Item2.ToString("C") 
+                + " " + item.Item3 + LEFT_SUFFIX;
         }
 
         // Method to print item in basket
@@ -165,7 +224,7 @@ namespace Assignment4
         // Variable to store phone number
         private string phone = "-";
 
-        // Variable to track displayed item variants in the background
+        // Variable to track displayed item variants in the background`
         private List<Tuple<string, decimal, int, int>> variants =
             new List<Tuple<string, decimal, int, int>>();
 
@@ -200,24 +259,6 @@ namespace Assignment4
             return output;
         }
 
-        public Form1()
-        {
-            InitializeComponent();
-
-            // Set list of item categories
-            itemCategoryListBox.Items.Clear();
-            itemCategoryListBox.Items.AddRange((object[])CATEGORIES);
-
-            // Start with item total of zero
-            updateTotalDisplay();
-
-            // Generate and set a new transaction ID
-            transactionID = generateRandomString();
-
-            // Display the transaction ID
-            transactionLabel.Text = TRANSACTIONID_PREFIX + transactionID;
-        }
-
         // Method to display item variants in list box and keep a list in the background
         private void loadVariants()
         {
@@ -230,7 +271,7 @@ namespace Assignment4
             {
                 case 0:
                     for (int i = 0; i < 7; i++)
-                    {
+                    {   
                         variants.Add(ITEMS[i]);
                         itemVariantListBox.Items.Add(itemVariant(i));
                     }
@@ -273,6 +314,145 @@ namespace Assignment4
                 default:
                     break;
             }
+        }
+
+        // Method to check if a given string hasn't been used previously
+        private Boolean isUnique(string searchString)
+        {
+            try
+            {
+                // Open file of transactions
+                StreamReader inputFile = File.OpenText(TRANSACTION_FILE_NAME);
+
+                // Until end of file
+                while (!inputFile.EndOfStream)
+                {
+                    // Check if the candidate transaction ID has been used
+                    if (searchString.Equals(inputFile.ReadLine()))
+                    {
+                        // Then, Stop reading the file
+                        inputFile.Close();
+
+                        // Then, indicate that the given string is not unique
+                        return false;
+                    }
+
+                    // Skip 8 lines
+                    for (int index = 0; index < 8; index++)
+                        inputFile.ReadLine();
+                }
+
+                // Stop reading file
+                inputFile.Close();
+            }
+            catch { }
+
+            // If no match found, the given string must be unique
+            return true;
+        }
+
+        // Method to generate a unique random string
+        private void generateTransactionID()
+        {
+            
+            string candidate = "";
+
+            // Track whether the string is unique from those in file
+            Boolean unique = false;
+            do
+            {
+                // Use a random string to test
+                candidate = generateRandomString();
+
+                // Check if that string is unique
+                unique = isUnique(candidate);
+            }
+            // Until the string is unique
+            while (!unique);
+
+            // Set the string as the transaction ID
+            transactionID = candidate;
+        }
+
+        // Adjust spacing for listbox presentation
+        private void addSpacesAfterName()
+        {
+            // Variable to track the length of the longest item name
+            int maxLength = 0;
+
+            // Width of single space
+            int spaceWidth = TextRenderer
+                .MeasureText((char)8239 + "", itemVariantListBox.Font).Width;
+
+            for (int i = 0; i < 60; i++)
+            {
+                int lengthInSpaces = TextRenderer
+                    .MeasureText(ITEMS[i].Item1, itemVariantListBox.Font).Width 
+                    / spaceWidth;
+                if (maxLength < lengthInSpaces)
+                    maxLength = lengthInSpaces;
+            }
+
+            for (int i = 0; i < ITEMS.Length; i++)
+            {
+                int lengthInSpaces = TextRenderer
+                    .MeasureText(ITEMS[i].Item1, itemVariantListBox.Font).Width
+                    / spaceWidth;
+
+                ITEMS[i] = new Tuple<string, decimal, int, int>(
+                    ITEMS[i].Item1 +
+                    new string((char)8239, maxLength - lengthInSpaces),
+                    ITEMS[i].Item2, ITEMS[i].Item3, ITEMS[i].Item4);
+            }
+                
+
+        }
+
+        public Form1()
+        {
+            InitializeComponent();
+
+            // Set list of item categories
+            itemCategoryListBox.Items.Clear();
+            itemCategoryListBox.Items.AddRange((object[])CATEGORIES);
+
+            // Start with item total of zero
+            updateTotalDisplay();
+
+            // Generate and set a new transaction ID
+            generateTransactionID();
+
+            // Display the transaction ID
+            transactionLabel.Text = TRANSACTIONID_PREFIX + transactionID;
+
+            // Set a tooltip for the "Add to Basket" button
+            toolTip.SetToolTip(addToBasketButton, ADD_TO_BASKET_TOOLTIP);
+
+            // Set a tooltip for the "Clear Basket" button
+            toolTip.SetToolTip(clearBasketButton, CLEAR_BASKET_TOOLTIP);
+
+            // Set a tooltip for the "Delete Item" button
+            toolTip.SetToolTip(deleteItemButton, DELETE_ITEM_TOOLTIP);
+
+            // Set a tooltip for the "Checkout" button
+            toolTip.SetToolTip(checkoutButton, CHECKOUT_TOOLTIP);
+
+            // Set a tooltip for the "Clear Search" button
+            toolTip.SetToolTip(clearSearchButton, CLEAR_SEARCH_TOOLTIP);
+
+            // Set a tooltip for the "Search" button
+            toolTip.SetToolTip(searchButton, SEARCH_TOOLTIP);
+
+            // Set a tooltip for the "Generate Sales Report" button
+            toolTip.SetToolTip(salesReportButton, GENERATE_SALES_REPORT_TOOLTIP);
+
+            // Set a tooltip for the "Display Stock Report" button
+            toolTip.SetToolTip(stockReportButton, DISPLAY_STOCK_REPORT_TOOLTIP);
+
+            // Set a tooltip for the "Exit" button
+            toolTip.SetToolTip(exitButton, EXIT_TOOLTIP);
+
+            addSpacesAfterName();
         }
 
         // Event handler called when item category is changed
@@ -326,10 +506,10 @@ namespace Assignment4
             // Update stock
             updateStock(index, -1);
 
-            // Update list of item variants shown
+            // Update list of item variants displayed
             loadVariants();
 
-            // Add item to basket and show it as such
+            // Add item to basket and display it as such
             basket.Add(ITEMS[index]);
             basketListBox.Items.Add(basketItem(index));
 
@@ -357,7 +537,7 @@ namespace Assignment4
             basketListBox.Items.Clear();
             basket.Clear();
 
-            // Update item variants shown
+            // Update item variants displayed
             loadVariants();
 
             // Hide the "Delete Item" button
@@ -437,10 +617,84 @@ namespace Assignment4
         // Event handler called on pressing the "Checkout" button
         private void checkoutButton_Click(object sender, EventArgs e)
         {
-            // Show message box prompting confirmation of purchase
-            DialogResult result = MessageBox.Show(CHECKOUT_MESSAGE_PART_1 + basket.Count +
-                CHECKOUT_MESSAGE_PART_2 + total.ToString("C") + CHECKOUT_MESSAGE_PART_3,
-                ALERT_MESSAGE, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            // Obtain name
+            name = nameTextBox.Text.Trim();
+
+            // Obtain email address
+            email = emailTextBox.Text.Trim();
+
+            // Obtain phone number
+            phone = phoneTextBox.Text.Trim();
+
+            // Check if name is empty
+            if (name == "")
+            {
+                // Display a message requesting that a name be entered
+                MessageBox.Show(ENTER_NAME_MESSAGE, ERROR_MESSAGE,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Assign focus to the name text field
+                nameTextBox.Focus();
+
+                // Abort the checkout process
+                return;
+
+            }
+            else if (email == "")
+            {
+                // Display a message requesting that an email address be entered
+                MessageBox.Show(ENTER_EMAIL_MESSAGE, ERROR_MESSAGE,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Assign focus to the email address text field
+                emailTextBox.Focus();
+
+                // Abort the checkout process
+                return;
+            }
+            else if(!new EmailAddressAttribute().IsValid(email) || 
+                !Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                // Display a message requesting that a valid email address be entered
+                MessageBox.Show(ENTER_VALID_EMAIL_MESSAGE, ERROR_MESSAGE,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Assign focus to the name text field
+                nameTextBox.Focus();
+
+                // Abort the checkout process
+                return;
+            }
+            else if (phone == "")
+            {
+                // Display a message requesting that a phone number be entered
+                MessageBox.Show(ENTER_PHONE_NUMBER_MESSAGE, ERROR_MESSAGE,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Assign focus to the phone number text field
+                phoneTextBox.Focus();
+
+                // Abort the checkout process
+                return;
+            }
+            else if (!(new PhoneAttribute().IsValid(phone)))
+            {
+                // Display a message requesting that a valid phone number be entered
+                MessageBox.Show(ENTER_VALID_PHONE_MESSAGE, ERROR_MESSAGE,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Assign focus to the phone number text field
+                phoneTextBox.Focus();
+
+                // Abort the checkout process
+                return;
+            }
+
+            // Display message box prompting confirmation of purchase
+            DialogResult result = MessageBox.Show(CHECKOUT_MESSAGE_PART_1 + 
+                basket.Count + CHECKOUT_MESSAGE_PART_2 
+                + total.ToString("C") + CHECKOUT_MESSAGE_PART_3, ALERT_MESSAGE, 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             // If user clicks "Yes"
             if(result == DialogResult.Yes)
@@ -453,7 +707,7 @@ namespace Assignment4
                     outputFile.WriteLine(transactionID);
 
                     // Write current date
-                    outputFile.WriteLine(DateTime.Today.ToString(DATE_FORMAT));
+                    outputFile.WriteLine(DateTime.Now);
 
                     // Write name
                     outputFile.WriteLine(name);
@@ -486,7 +740,7 @@ namespace Assignment4
                     // Empty basket
                     basket.Clear();
 
-                    // Update item variants shown
+                    // Update item variants displayed
                     loadVariants();
 
                     // Set values to default
@@ -496,7 +750,7 @@ namespace Assignment4
                     phone = "-";
 
                     // Prepare a new transaction ID
-                    transactionID = generateRandomString();
+                    generateTransactionID();
 
                     // Display the new transaction ID
                     transactionLabel.Text = transactionID;
@@ -519,10 +773,12 @@ namespace Assignment4
                     checkoutButton.Hide();
 
                 }
+                // In case of exception
                 catch (Exception ex)
                 {
-                    // Show error message from exception thrown
-                    MessageBox.Show(ex.Message);
+                    // Display error message from exception thrown
+                    MessageBox.Show(ex.Message, ERROR_MESSAGE,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
         }
 
@@ -536,7 +792,7 @@ namespace Assignment4
         // Event handler called on pressing the "Display Stock Report" button
         private void stockReportButton_Click(object sender, EventArgs e)
         {
-            // Create a form to show stock details
+            // Create a form to display stock details
             new StockReportForm().Show();
         }
 
@@ -557,85 +813,130 @@ namespace Assignment4
         // Event handler called on pressing the "Search" button
         private void searchButton_Click(object sender, EventArgs e)
         {
+            // Obtain search term
+            string searchTerm = searchTextBox.Text.Trim();
+
+            if (searchTerm == "")
+            {
+                // Show message indicating that nothing was entered to search by
+                MessageBox.Show(NO_SEARCH_TERM_MESSAGE, ERROR_MESSAGE,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Assign focus to the search textbox
+                searchTextBox.Focus();
+
+                // Abort the search process
+                return;
+            }
+
             // Clear the search results field
             searchResultsListBox.Items.Clear();
 
-            // If search is by transaction ID
-            if(transactionIDRadioButton.Checked)
-                try
+            try
+            {
+                // Open transaction record file
+                StreamReader recordFile = File.OpenText(TRANSACTION_FILE_NAME);                
+
+                // Variable to check if search is by transaction ID
+                Boolean isSearchingByID = transactionIDRadioButton.Checked;
+
+                // Variable to check if a match was found
+                Boolean matchFound = false;
+
+                // Until end of file
+                while (!recordFile.EndOfStream)
                 {
-                    // Open transaction record file
-                    StreamReader recordFile = File.OpenText(TRANSACTION_FILE_NAME);
+                    // Read the first line, which is supposed to be a record's transaction ID
+                    string? recordID = recordFile.ReadLine();
 
-                    // Obtain searched transaction ID
-                    string searchedID = searchTextBox.Text.Trim();
+                    // Read the second line, which is supposed to be a record's date
+                    string recordDate = recordFile.ReadLine()!;
 
-                    // Variable to check if a match was found
-                    Boolean matchFound = false;
+                    // Variable to track if the current record is a match
+                    Boolean isMatch = false;
 
-                    // Until end of file
-                    while (!recordFile.EndOfStream)
+                    if (isSearchingByID)
+                        isMatch = recordID == searchTerm;
+                    else
                     {
-                        // Read the first line, which is supposed to be a record's transaction ID
-                        string? recordID = recordFile.ReadLine();
-                        if (recordID == searchedID)
-                        {
-                            // Note that a match was found
-                            matchFound = true;
+                        string[] recordDateArray = recordDate.Split(' ')[0].Split('/');
+                        string[] searchDateArray = searchTerm.Split('/');
 
-                            // Print the transaction ID
-                            searchResultsListBox.Items.Add(TRANSACTIONID_PREFIX + recordID);
-
-                            // Print the transaction date
-                            searchResultsListBox.Items.Add(DATE_PREFIX + recordFile.ReadLine());
-
-                            // Print the name associated with the record
-                            searchResultsListBox.Items.Add(NAME_PREFIX + recordFile.ReadLine());
-
-                            // Print the email address associated with the record
-                            searchResultsListBox.Items.Add(EMAIL_PREFIX + recordFile.ReadLine());
-
-                            // Print the phone number associated with the record
-                            searchResultsListBox.Items.Add(PHONE_PREFIX + recordFile.ReadLine());
-
-                            // Print the item total
-                            searchResultsListBox.Items.Add(ITEM_TOTAL_PREFIX + recordFile.ReadLine());
-
-                            // Print the item count
-                            searchResultsListBox.Items.Add(COUNT_PREFIX + recordFile.ReadLine());
-
-                            // Obtain the comma-separated list of item IDs
-                            string? itemIDList = recordFile.ReadLine();
-
-                            // Form an array of IDs
-                            var itemIDArray = itemIDList.Split(",");
-
-                            searchResultsListBox.Items.Add(ITEMS_PREFIX);
-
-                            // Iterate through each ID
-                            for (int i = 0; i < itemIDArray.Length - 1; i++)
-                                // Print item name
-                                searchResultsListBox.Items.Add(ITEMS[int.Parse(itemIDArray[i])].Item1 + "\n");
-
-                            // Quit searching
-                            break;
-                        }
-                        else
-                            // Skip the next 7 lines
-                            for (int i = 0; i < 7; i++)
-                                recordFile.ReadLine();
+                        isMatch = int.Parse(recordDateArray[0]) == int.Parse(searchDateArray[0])
+                            && int.Parse(searchDateArray[1]) == int.Parse(searchDateArray[1])
+                            && int.Parse(searchDateArray[2]) == int.Parse(searchDateArray[2]);
                     }
 
-                    // In case of no match being found
-                    if (!matchFound)
-                        // Indicate such
-                        searchResultsListBox.Items.Add(NO_RESULTS_FOUND_MESSAGE);
+                    // Check if search term matches ID or date, whichever is applicable
+                    if (isMatch)
+                    {
+                        // Note that a match was found
+                        matchFound = true;
 
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message, ERROR_MESSAGE, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                        // Print the transaction ID
+                        searchResultsListBox.Items.Add(TRANSACTIONID_PREFIX + recordID);
+
+                        // Print the transaction date
+                        searchResultsListBox.Items.Add(DATE_PREFIX + recordDate);
+
+                        // Print the name associated with the record
+                        searchResultsListBox.Items.Add(NAME_PREFIX + recordFile.ReadLine());
+
+                        // Print the email address associated with the record
+                        searchResultsListBox.Items.Add(EMAIL_PREFIX + recordFile.ReadLine());
+
+                        // Print the phone number associated with the record
+                        searchResultsListBox.Items.Add(PHONE_PREFIX + recordFile.ReadLine());
+
+                        // Print the item total
+                        searchResultsListBox.Items.Add(ITEM_TOTAL_PREFIX + recordFile.ReadLine());
+
+                        // Print the item count
+                        searchResultsListBox.Items.Add(COUNT_PREFIX + recordFile.ReadLine());
+
+                        // Obtain the comma-separated list of item IDs
+                        string? itemIDList = recordFile.ReadLine();
+
+                        // Form an array of IDs
+                        var itemIDArray = itemIDList!.Split(",");
+
+                        searchResultsListBox.Items.Add(ITEMS_PREFIX);
+
+                        // Iterate through each ID
+                        for (int i = 0; i < itemIDArray.Length - 1; i++)
+                            // Print item name
+                            searchResultsListBox.Items
+                            .Add(ITEMS[int.Parse(itemIDArray[i])].Item1 + "\n");
+
+                        // Quit searching if search is by ID
+                        if (isSearchingByID)
+                            break;
+                        else
+                            // Print a separator line
+                            searchResultsListBox.Items.Add(" ");
+                    }
+                    else
+                        // Skip the next 7 lines
+                        for (int i = 0; i < 6; i++)
+                            recordFile.ReadLine();
+            }
+
+            // Close the file
+            recordFile.Close();
+
+            // In case of no match being found
+            if (!matchFound)
+                    // Indicate such
+                    searchResultsListBox.Items.Add(NO_RESULTS_FOUND_MESSAGE);
+
+            }
+            // In case of exception
+            catch(Exception ex)
+            {
+                // Display message detailing cause of exception
+                MessageBox.Show(ex.Message, ERROR_MESSAGE, 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } 
         }
     }
 }       

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.customerInformationGroupBox = new System.Windows.Forms.GroupBox();
             this.transactionLabel = new System.Windows.Forms.Label();
@@ -60,6 +61,7 @@
             this.transactionDateRadioButton = new System.Windows.Forms.RadioButton();
             this.transactionIDRadioButton = new System.Windows.Forms.RadioButton();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.mainPanel.SuspendLayout();
             this.customerInformationGroupBox.SuspendLayout();
             this.itemSelectionGroupBox.SuspendLayout();
@@ -457,5 +459,6 @@
         private Label emailLabel;
         private TextBox nameTextBox;
         private Label nameLabel;
+        private ToolTip toolTip;
     }
 }

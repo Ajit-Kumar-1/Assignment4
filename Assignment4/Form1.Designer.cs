@@ -408,7 +408,7 @@
             this.ClientSize = new System.Drawing.Size(1463, 1463);
             this.Controls.Add(this.mainPanel);
             this.Name = "Form1";
-            this.Text = ",";
+            this.Text = "Electronics Store";
             this.mainPanel.ResumeLayout(false);
             this.customerInformationGroupBox.ResumeLayout(false);
             this.customerInformationGroupBox.PerformLayout();

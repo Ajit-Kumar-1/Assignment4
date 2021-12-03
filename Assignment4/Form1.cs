@@ -8,66 +8,66 @@ namespace Assignment4
         // List of items
         private static Tuple<string, decimal, int, int>[] ITEMS = 
             new Tuple<string, decimal, int, int>[60] { 
-            new Tuple<string, decimal, int, int>("Compact Laptop (Silver)", 1129, 2, 0),
-            new Tuple<string, decimal, int, int>("Compact Laptop (Grey)", 1129, 2, 1),
-            new Tuple<string, decimal, int, int>("Compact Laptop (Gold)", 1129, 2, 2),
-            new Tuple<string, decimal, int, int>("Regular Laptop (Silver)", 2249, 2, 3),
-            new Tuple<string, decimal, int, int>("Regular Laptop (Grey)", 2249, 2, 4),
-            new Tuple<string, decimal, int, int>("Big Laptop (Silver)", 2749, 2, 5),
-            new Tuple<string, decimal, int, int>("Big Laptop (Grey)", 2749, 2, 6),
-            new Tuple<string, decimal, int, int>("Small Desktop (Silver)", 799, 2, 7),
-            new Tuple<string, decimal, int, int>("Small Desktop (Grey)", 799, 2, 8),
-            new Tuple<string, decimal, int, int>("All-in-one Desktop (Blue)", 1499, 2, 9),
-            new Tuple<string, decimal, int, int>("All-in-one Desktop (Green)", 1499, 2, 10),
-            new Tuple<string, decimal, int, int>("All-in-one Desktop (Pink)", 1499, 2, 11),
-            new Tuple<string, decimal, int, int>("All-in-one Desktop (Silver)", 1499, 2, 12),
-            new Tuple<string, decimal, int, int>("All-in-one Desktop (Yellow)", 1499, 2, 13),
-            new Tuple<string, decimal, int, int>("All-in-one Desktop (Orange)", 1499, 2, 14),
-            new Tuple<string, decimal, int, int>("All-in-one Desktop (Purple)", 1499, 2, 15),
-            new Tuple<string, decimal, int, int>("Big powerful tablet (Silver)", 1229, 2, 16),
-            new Tuple<string, decimal, int, int>("Big powerful tablet (Grey)", 1229, 2, 17),
-            new Tuple<string, decimal, int, int>("Powerful tablet (Silver)", 909, 2, 18),
-            new Tuple<string, decimal, int, int>("Powerful tablet (Grey)", 909, 2, 19),
-            new Tuple<string, decimal, int, int>("Regular tablet (Grey)", 679, 2, 20),
-            new Tuple<string, decimal, int, int>("Regular tablet (Silver)", 679, 2, 21),
-            new Tuple<string, decimal, int, int>("Regular tablet (Pink)", 679, 2, 22),
-            new Tuple<string, decimal, int, int>("Regular tablet (Green)", 679, 2, 23),
-            new Tuple<string, decimal, int, int>("Regular tablet (Blue)", 679, 2, 24),
-            new Tuple<string, decimal, int, int>("Compact tablet (Grey)", 569, 2, 25),
-            new Tuple<string, decimal, int, int>("Compact tablet (Pink)", 569, 2, 26),
-            new Tuple<string, decimal, int, int>("Compact tablet (Purple)", 569, 2, 27),
-            new Tuple<string, decimal, int, int>("Compact tablet (White)", 569, 2, 28),
-            new Tuple<string, decimal, int, int>("Basic tablet (Silver)", 369, 2, 29),
-            new Tuple<string, decimal, int, int>("Basic tablet (Grey)", 369, 2, 30),
-            new Tuple<string, decimal, int, int>("Compact phone (White)", 499, 2, 31),
-            new Tuple<string, decimal, int, int>("Compact phone (Black)", 499, 2, 32),
-            new Tuple<string, decimal, int, int>("Compact phone (Red)", 499, 2, 33),
-            new Tuple<string, decimal, int, int>("Small phone (White)", 829, 2, 34),
-            new Tuple<string, decimal, int, int>("Small phone (Black)", 829, 2, 35),
-            new Tuple<string, decimal, int, int>("Small phone (Red)", 829, 2, 36),
-            new Tuple<string, decimal, int, int>("Small phone (Blue)", 829, 2, 37),
-            new Tuple<string, decimal, int, int>("Small phone (Pink)", 829, 2, 38),
-            new Tuple<string, decimal, int, int>("Regular phone (White)", 929, 2, 39),
-            new Tuple<string, decimal, int, int>("Regular phone (Black)", 929, 2, 40),
-            new Tuple<string, decimal, int, int>("Regular phone (Red)", 929, 2, 41),
-            new Tuple<string, decimal, int, int>("Regular phone (Blue)", 929, 2, 42),
-            new Tuple<string, decimal, int, int>("Regular phone (Pink)", 929, 2, 43),
-            new Tuple<string, decimal, int, int>("Large phone (Silver)", 1279, 2, 44),
-            new Tuple<string, decimal, int, int>("Large phone (Grey)", 1279, 2, 45),
-            new Tuple<string, decimal, int, int>("Large phone (Gold)", 1279, 2, 46),
-            new Tuple<string, decimal, int, int>("Large phone (Blue)", 1279, 2, 47),
-            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (White)", 429, 2, 48),
-            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Black)", 429, 2, 49),
-            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Green)", 429, 2, 50),
-            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Blue)", 429, 2, 51),
-            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Red)", 429, 2, 52),
-            new Tuple<string, decimal, int, int>("Smartwatch (L) (White)", 459, 2, 53),
-            new Tuple<string, decimal, int, int>("Smartwatch (L) (Black)", 459, 2, 54),
-            new Tuple<string, decimal, int, int>("Smartwatch (L) (Green)", 459, 2, 55),
-            new Tuple<string, decimal, int, int>("Smartwatch (L) (Blue)", 459, 2, 56),
-            new Tuple<string, decimal, int, int>("Smartwatch (L) (Red)", 459, 2, 57),
-            new Tuple<string, decimal, int, int>("In-ear Headphones", 199, 2, 58),
-            new Tuple<string, decimal, int, int>("In-ear Headphones with ANC", 279, 2, 59),
+            new Tuple<string, decimal, int, int>("Compact Laptop (Silver)", 1129, 0, 0),
+            new Tuple<string, decimal, int, int>("Compact Laptop (Grey)", 1129, 0, 1),
+            new Tuple<string, decimal, int, int>("Compact Laptop (Gold)", 1129, 0, 2),
+            new Tuple<string, decimal, int, int>("Regular Laptop (Silver)", 2249, 0, 3),
+            new Tuple<string, decimal, int, int>("Regular Laptop (Grey)", 2249, 0, 4),
+            new Tuple<string, decimal, int, int>("Big Laptop (Silver)", 2749, 0, 5),
+            new Tuple<string, decimal, int, int>("Big Laptop (Grey)", 2749, 0, 6),
+            new Tuple<string, decimal, int, int>("Small Desktop (Silver)", 799, 0, 7),
+            new Tuple<string, decimal, int, int>("Small Desktop (Grey)", 799, 0, 8),
+            new Tuple<string, decimal, int, int>("All-in-one Desktop (Blue)", 1499, 0, 9),
+            new Tuple<string, decimal, int, int>("All-in-one Desktop (Green)", 1499, 0, 10),
+            new Tuple<string, decimal, int, int>("All-in-one Desktop (Pink)", 1499, 0, 11),
+            new Tuple<string, decimal, int, int>("All-in-one Desktop (Silver)", 1499, 0, 12),
+            new Tuple<string, decimal, int, int>("All-in-one Desktop (Yellow)", 1499, 0, 13),
+            new Tuple<string, decimal, int, int>("All-in-one Desktop (Orange)", 1499, 0, 14),
+            new Tuple<string, decimal, int, int>("All-in-one Desktop (Purple)", 1499, 0, 15),
+            new Tuple<string, decimal, int, int>("Big powerful tablet (Silver)", 1229, 0, 16),
+            new Tuple<string, decimal, int, int>("Big powerful tablet (Grey)", 1229, 0, 17),
+            new Tuple<string, decimal, int, int>("Powerful tablet (Silver)", 909, 0, 18),
+            new Tuple<string, decimal, int, int>("Powerful tablet (Grey)", 909, 0, 19),
+            new Tuple<string, decimal, int, int>("Regular tablet (Grey)", 679, 0, 20),
+            new Tuple<string, decimal, int, int>("Regular tablet (Silver)", 679, 0, 21),
+            new Tuple<string, decimal, int, int>("Regular tablet (Pink)", 679, 0, 22),
+            new Tuple<string, decimal, int, int>("Regular tablet (Green)", 679, 0, 23),
+            new Tuple<string, decimal, int, int>("Regular tablet (Blue)", 679, 0, 24),
+            new Tuple<string, decimal, int, int>("Compact tablet (Grey)", 569, 0, 25),
+            new Tuple<string, decimal, int, int>("Compact tablet (Pink)", 569, 0, 26),
+            new Tuple<string, decimal, int, int>("Compact tablet (Purple)", 569, 0, 27),
+            new Tuple<string, decimal, int, int>("Compact tablet (White)", 569, 0, 28),
+            new Tuple<string, decimal, int, int>("Basic tablet (Silver)", 369, 0, 29),
+            new Tuple<string, decimal, int, int>("Basic tablet (Grey)", 369, 0, 30),
+            new Tuple<string, decimal, int, int>("Compact phone (White)", 499, 0, 31),
+            new Tuple<string, decimal, int, int>("Compact phone (Black)", 499, 0, 32),
+            new Tuple<string, decimal, int, int>("Compact phone (Red)", 499, 0, 33),
+            new Tuple<string, decimal, int, int>("Small phone (White)", 829, 0, 34),
+            new Tuple<string, decimal, int, int>("Small phone (Black)", 829, 0, 35),
+            new Tuple<string, decimal, int, int>("Small phone (Red)", 829, 0, 36),
+            new Tuple<string, decimal, int, int>("Small phone (Blue)", 829, 0, 37),
+            new Tuple<string, decimal, int, int>("Small phone (Pink)", 829, 0, 38),
+            new Tuple<string, decimal, int, int>("Regular phone (White)", 929, 0, 39),
+            new Tuple<string, decimal, int, int>("Regular phone (Black)", 929, 0, 40),
+            new Tuple<string, decimal, int, int>("Regular phone (Red)", 929, 0, 41),
+            new Tuple<string, decimal, int, int>("Regular phone (Blue)", 929, 0, 42),
+            new Tuple<string, decimal, int, int>("Regular phone (Pink)", 929, 0, 43),
+            new Tuple<string, decimal, int, int>("Large phone (Silver)", 1279, 0, 44),
+            new Tuple<string, decimal, int, int>("Large phone (Grey)", 1279, 0, 45),
+            new Tuple<string, decimal, int, int>("Large phone (Gold)", 1279, 0, 46),
+            new Tuple<string, decimal, int, int>("Large phone (Blue)", 1279, 0, 47),
+            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (White)", 429, 0, 48),
+            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Black)", 429, 0, 49),
+            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Green)", 429, 0, 50),
+            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Blue)", 429, 0, 51),
+            new Tuple<string, decimal, int, int>("Smartwatch (S/M) (Red)", 429, 0, 52),
+            new Tuple<string, decimal, int, int>("Smartwatch (L) (White)", 459, 0, 53),
+            new Tuple<string, decimal, int, int>("Smartwatch (L) (Black)", 459, 0, 54),
+            new Tuple<string, decimal, int, int>("Smartwatch (L) (Green)", 459, 0, 55),
+            new Tuple<string, decimal, int, int>("Smartwatch (L) (Blue)", 459, 0, 56),
+            new Tuple<string, decimal, int, int>("Smartwatch (L) (Red)", 459, 0, 57),
+            new Tuple<string, decimal, int, int>("In-ear Headphones", 199, 0, 58),
+            new Tuple<string, decimal, int, int>("In-ear Headphones with ANC", 279, 0, 59),
         };
 
         // Variable to track stock levels at the start of the day
@@ -131,7 +131,7 @@ namespace Assignment4
         private const string NAME_PREFIX = "Name: ";
 
         // Prefix text for displaying date
-        private const string DATE_PREFIX = "Date: ";
+        private const string TIMESTAMP_PREFIX = "Timestamp: ";
 
         // Prefix text for displaying email address
         private const string EMAIL_PREFIX = "Email address: ";
@@ -143,7 +143,7 @@ namespace Assignment4
         private const string COUNT_PREFIX = "Item count: ";
 
         // Prefix text for displaying items
-        private const string ITEMS_PREFIX = "Items: ";
+        private const string ITEMS_PREFIX = "Item(s): ";
 
         // Tooltip message displayed on pressing the "Add to basket" button
         private const string ADD_TO_BASKET_TOOLTIP =  "Add the selected item to basket";
@@ -231,6 +231,9 @@ namespace Assignment4
         // Variable to track basket items in the background
         private List<Tuple<string, decimal, int, int>> basket =
             new List<Tuple<string, decimal, int, int>>();
+
+        // Array to record starting stock level
+        private int[] initialStock = new int[60];
 
         // Variable to keep track of basket total
         private decimal total = 0.00M;
@@ -374,7 +377,7 @@ namespace Assignment4
             transactionID = candidate;
         }
 
-        // Adjust spacing for listbox presentation
+        // Method to adjust spacing for listbox presentation
         private void addSpacesAfterName()
         {
             // Variable to track the length of the longest item name
@@ -403,9 +406,43 @@ namespace Assignment4
                     ITEMS[i].Item1 +
                     new string((char)8239, maxLength - lengthInSpaces),
                     ITEMS[i].Item2, ITEMS[i].Item3, ITEMS[i].Item4);
-            }
-                
+            }                
 
+        }
+
+        // Method to enter initial values of stock for all items
+        private void enterInitialStock()
+        {
+
+            // Initialize items of array
+            Array.Fill(initialStock, 0);
+
+            try
+            {
+
+                // Open file
+                StreamReader stockFile = File.OpenText(STOCK_FILE_NAME);
+
+                // Store contents of file in a new array
+                string[] stockArray = stockFile.ReadToEnd().Split((char)13);
+
+                // Close file
+                stockFile.Close();
+
+                // Store stock values in array
+                for (int i = 0; i < stockArray.Length; i++)
+                {
+                    // Obtain the stock value for the item at this index
+                    int stockValue = int.Parse(stockArray[i]);
+
+                    // Save it to the initial stock record
+                    initialStock[i] = stockValue;
+
+                    // Save it to current stock record as well
+                    updateStock(i, stockValue);
+                }
+            }
+            catch { }
         }
 
         public Form1()
@@ -451,6 +488,9 @@ namespace Assignment4
 
             // Set a tooltip for the "Exit" button
             toolTip.SetToolTip(exitButton, EXIT_TOOLTIP);
+
+            // Save starting stock levels
+            enterInitialStock();
 
             addSpacesAfterName();
         }
@@ -835,7 +875,16 @@ namespace Assignment4
             try
             {
                 // Open transaction record file
-                StreamReader recordFile = File.OpenText(TRANSACTION_FILE_NAME);                
+                StreamReader recordFile = File.OpenText(TRANSACTION_FILE_NAME);
+
+                // Read the entire file and store it as an array of lines
+                string[] fileData = recordFile.ReadToEnd().Split((char)13);
+
+                // Close file
+                recordFile.Close();
+
+                // Initiate array index
+                int index = 0;
 
                 // Variable to check if search is by transaction ID
                 Boolean isSearchingByID = transactionIDRadioButton.Checked;
@@ -844,13 +893,13 @@ namespace Assignment4
                 Boolean matchFound = false;
 
                 // Until end of file
-                while (!recordFile.EndOfStream)
+                while (index < fileData.Length - 7)
                 {
                     // Read the first line, which is supposed to be a record's transaction ID
-                    string? recordID = recordFile.ReadLine();
+                    string? recordID = fileData[index++];
 
                     // Read the second line, which is supposed to be a record's date
-                    string recordDate = recordFile.ReadLine()!;
+                    string recordDate = fileData[index++];
 
                     // Variable to track if the current record is a match
                     Boolean isMatch = false;
@@ -863,8 +912,8 @@ namespace Assignment4
                         string[] searchDateArray = searchTerm.Split('/');
 
                         isMatch = int.Parse(recordDateArray[0]) == int.Parse(searchDateArray[0])
-                            && int.Parse(searchDateArray[1]) == int.Parse(searchDateArray[1])
-                            && int.Parse(searchDateArray[2]) == int.Parse(searchDateArray[2]);
+                            && int.Parse(recordDateArray[1]) == int.Parse(searchDateArray[1])
+                            && int.Parse(recordDateArray[2]) == int.Parse(searchDateArray[2]);
                     }
 
                     // Check if search term matches ID or date, whichever is applicable
@@ -877,25 +926,26 @@ namespace Assignment4
                         searchResultsListBox.Items.Add(TRANSACTIONID_PREFIX + recordID);
 
                         // Print the transaction date
-                        searchResultsListBox.Items.Add(DATE_PREFIX + recordDate);
+                        searchResultsListBox.Items.Add(TIMESTAMP_PREFIX + recordDate);
 
                         // Print the name associated with the record
-                        searchResultsListBox.Items.Add(NAME_PREFIX + recordFile.ReadLine());
+                        searchResultsListBox.Items.Add(NAME_PREFIX + fileData[index++]);
 
                         // Print the email address associated with the record
-                        searchResultsListBox.Items.Add(EMAIL_PREFIX + recordFile.ReadLine());
+                        searchResultsListBox.Items.Add(EMAIL_PREFIX + fileData[index++]);
 
                         // Print the phone number associated with the record
-                        searchResultsListBox.Items.Add(PHONE_PREFIX + recordFile.ReadLine());
+                        searchResultsListBox.Items.Add(PHONE_PREFIX + fileData[index++]);
 
                         // Print the item total
-                        searchResultsListBox.Items.Add(ITEM_TOTAL_PREFIX + recordFile.ReadLine());
+                        searchResultsListBox.Items.Add(ITEM_TOTAL_PREFIX + 
+                            decimal.Parse(fileData[index++]).ToString("C"));
 
                         // Print the item count
-                        searchResultsListBox.Items.Add(COUNT_PREFIX + recordFile.ReadLine());
+                        searchResultsListBox.Items.Add(COUNT_PREFIX + fileData[index++]);
 
                         // Obtain the comma-separated list of item IDs
-                        string? itemIDList = recordFile.ReadLine();
+                        string? itemIDList = fileData[index++];
 
                         // Form an array of IDs
                         var itemIDArray = itemIDList!.Split(",");
@@ -916,13 +966,9 @@ namespace Assignment4
                             searchResultsListBox.Items.Add(" ");
                     }
                     else
-                        // Skip the next 7 lines
-                        for (int i = 0; i < 6; i++)
-                            recordFile.ReadLine();
+                        // Skip the next 6 lines
+                        index += 6;
             }
-
-            // Close the file
-            recordFile.Close();
 
             // In case of no match being found
             if (!matchFound)

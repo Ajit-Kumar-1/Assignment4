@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.mainPanel = new System.Windows.Forms.Panel();
             this.customerInformationGroupBox = new System.Windows.Forms.GroupBox();
             this.transactionLabel = new System.Windows.Forms.Label();
@@ -420,7 +421,7 @@
             this.passwordButton.Name = "passwordButton";
             this.passwordButton.Size = new System.Drawing.Size(150, 46);
             this.passwordButton.TabIndex = 3;
-            this.passwordButton.Text = "Sign In";
+            this.passwordButton.Text = "&Sign In";
             this.passwordButton.UseVisualStyleBackColor = true;
             this.passwordButton.Click += new System.EventHandler(this.passwordButton_Click);
             // 
@@ -444,6 +445,8 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Location = new System.Drawing.Point(583, 153);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(292, 258);
@@ -454,7 +457,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1463, 777);
+            this.ClientSize = new System.Drawing.Size(1463, 766);
             this.Controls.Add(this.passwordPanel);
             this.Controls.Add(this.mainPanel);
             this.Name = "Form1";

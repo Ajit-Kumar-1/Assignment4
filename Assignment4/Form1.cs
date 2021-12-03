@@ -11,6 +11,9 @@ namespace Assignment4
         // Password attempts remaining
         private int passwordAttempts = 4;
 
+        // Variable to track if signed in, to perform/not perform closing procedures
+        private Boolean isSignedIn = false;
+
         // List of items
         private Tuple<string, decimal, int, int>[] ITEMS =
             new Tuple<string, decimal, int, int>[60] {
@@ -167,6 +170,9 @@ namespace Assignment4
 
         // Prefix text for entering item sales count in sales report
         private const string UNITS_SOLD_PREFIX = "Units sold today: ";
+
+        // Tooltip message displayed on pressing the "Sign In" button
+        private const string SIGN_IN_TOOLTIP = "Enter password and sign in";
 
         // Tooltip message displayed on pressing the "Add to basket" button
         private const string ADD_TO_BASKET_TOOLTIP = "Add the selected item to basket";
@@ -577,6 +583,9 @@ namespace Assignment4
 
             // Display the transaction ID
             transactionLabel.Text = TRANSACTIONID_PREFIX + transactionID;
+
+            // Set a tooltip for the "Sign In" button
+            toolTip.SetToolTip(passwordButton, SIGN_IN_TOOLTIP);
 
             // Set a tooltip for the "Add to Basket" button
             toolTip.SetToolTip(addToBasketButton, ADD_TO_BASKET_TOOLTIP);
@@ -1174,6 +1183,7 @@ namespace Assignment4
         // Form close event
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (isSignedIn)
             // Possible occurrence of file I/O exception
             try
             {
@@ -1215,6 +1225,9 @@ namespace Assignment4
                 // Set form height to accommodate main screen
                 this.Height = mainPanel.Height + 60;
 
+                // Signed in
+                isSignedIn = true;
+
                 // Hide the password screen
                 passwordPanel.Hide();
 
@@ -1252,13 +1265,17 @@ namespace Assignment4
         // Event handler triggered on pressing the "Sign In" button
         private void passwordButton_Click(object sender, EventArgs e)
         {
+            // Submit password
             enterPassword();
         }
 
         // Event handler triggered on pressing a key when focused on the password textbox
         private void passwordTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            enterPassword();
+            // If the key pressed is the Enter/return key
+            if(e.KeyChar == (char)13)
+                // Submit password
+                enterPassword();
         }
 
         //

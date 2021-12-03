@@ -12,9 +12,27 @@ namespace Assignment4
 {
     public partial class StockReportForm : Form
     {
-        public StockReportForm()
+        public StockReportForm(Tuple<string, decimal, int, int>[] items, 
+            int[] initialStock, string timestamp)
         {
             InitializeComponent();
+
+            // Set timestamp
+            timestampLabel.Text = timestampLabel.Text + timestamp;
+
+            // Iterate over list of items
+            for (int i = 0; i < items.Length; i++)
+            {
+                // Initialize display string
+                string output = items[i].Item1 + '\t' 
+                    + initialStock[i] + "\t\t" + items[i].Item3;
+
+                // Display string
+                listBox.Items.Add(output);
+            }
+
+
         }
+
     }
 }

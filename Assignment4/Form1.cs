@@ -5,9 +5,12 @@ namespace Assignment4
 {
     public partial class Form1 : Form
     {
+        // PASSWORD
+        private const string PASSWORD = "password";
+
         // List of items
-        private static Tuple<string, decimal, int, int>[] ITEMS = 
-            new Tuple<string, decimal, int, int>[60] { 
+        private Tuple<string, decimal, int, int>[] ITEMS =
+            new Tuple<string, decimal, int, int>[60] {
             new Tuple<string, decimal, int, int>("Compact Laptop (Silver)", 1129, 0, 0),
             new Tuple<string, decimal, int, int>("Compact Laptop (Grey)", 1129, 0, 1),
             new Tuple<string, decimal, int, int>("Compact Laptop (Gold)", 1129, 0, 2),
@@ -70,9 +73,6 @@ namespace Assignment4
             new Tuple<string, decimal, int, int>("In-ear Headphones with ANC", 279, 0, 59),
         };
 
-        // Variable to track stock levels at the start of the day
-        private Tuple<string, decimal, int, int>[] originalItems = ITEMS;
-
         // List of item categories
         private string[] CATEGORIES = new string[6] {
             "Laptop",
@@ -89,6 +89,10 @@ namespace Assignment4
         // Error message
         private const string ERROR_MESSAGE = "Error";
 
+        // Message indicating that a sales report was generated successfully
+        private const string GENERATE_SALES_SUCCESS =
+            "Sales report generated and saved to file.";
+
         // Message indicating that nothing was entered to search
         private const string NO_SEARCH_TERM_MESSAGE = "Please enter a value to search by";
 
@@ -99,7 +103,7 @@ namespace Assignment4
         private const string ENTER_NAME_MESSAGE = "Name is empty. Please enter a name";
 
         // Message requesting that an email address be entered
-        private const string ENTER_EMAIL_MESSAGE = 
+        private const string ENTER_EMAIL_MESSAGE =
             "Email address is empty. Please enter a valid email address";
 
         // Message requesting that a valid email address be entered
@@ -145,8 +149,14 @@ namespace Assignment4
         // Prefix text for displaying items
         private const string ITEMS_PREFIX = "Item(s): ";
 
+        // Prefix text for entering item name in sales report
+        private const string ITEM_NAME_PREFIX = "Item name: ";
+
+        // Prefix text for entering item sales count in sales report
+        private const string UNITS_SOLD_PREFIX = "Units sold today: ";
+
         // Tooltip message displayed on pressing the "Add to basket" button
-        private const string ADD_TO_BASKET_TOOLTIP =  "Add the selected item to basket";
+        private const string ADD_TO_BASKET_TOOLTIP = "Add the selected item to basket";
 
         // Tooltip message displayed on pressing the "Clear basket" button
         private const string CLEAR_BASKET_TOOLTIP = "Return items in basket to stock";
@@ -161,7 +171,7 @@ namespace Assignment4
         private const string CLEAR_SEARCH_TOOLTIP = "Clear search results and searched term";
 
         // Tooltip message displayed on pressing the "Search" button
-        private const string SEARCH_TOOLTIP = 
+        private const string SEARCH_TOOLTIP =
             "Search file for transactions matching given ID/Date";
 
         // Tooltip message displayed on pressing the "Generate Sales Report" button
@@ -190,6 +200,9 @@ namespace Assignment4
         // File name for stock record file
         private const string STOCK_FILE_NAME = "../stock.txt";
 
+        // File name for saving sales report
+        private const string SALES_REPORT_FILE_NAME = "../sales_reports.txt";
+
         // Method to update the displayed basket total
         private void updateTotalDisplay()
         {
@@ -198,10 +211,10 @@ namespace Assignment4
         }
 
         // Method to print item variants' details in list box
-        private static string itemVariant(int index)
+        private string itemVariant(int index)
         {
             Tuple<string, decimal, int, int> item = ITEMS[index];
-            return item.Item1 + item.Item2.ToString("C") 
+            return item.Item1 + item.Item2.ToString("C")
                 + " " + item.Item3 + LEFT_SUFFIX;
         }
 
@@ -232,9 +245,6 @@ namespace Assignment4
         private List<Tuple<string, decimal, int, int>> basket =
             new List<Tuple<string, decimal, int, int>>();
 
-        // Array to record starting stock level
-        private int[] initialStock = new int[60];
-
         // Variable to keep track of basket total
         private decimal total = 0.00M;
 
@@ -243,7 +253,7 @@ namespace Assignment4
         {
             // Replace the item in the list with the stock level adjusted
             ITEMS[index] = new Tuple<string, decimal, int, int>
-                (ITEMS[index].Item1, ITEMS[index].Item2, 
+                (ITEMS[index].Item1, ITEMS[index].Item2,
                 ITEMS[index].Item3 + increment, ITEMS[index].Item4);
         }
 
@@ -274,7 +284,7 @@ namespace Assignment4
             {
                 case 0:
                     for (int i = 0; i < 7; i++)
-                    {   
+                    {
                         variants.Add(ITEMS[i]);
                         itemVariantListBox.Items.Add(itemVariant(i));
                     }
@@ -357,7 +367,7 @@ namespace Assignment4
         // Method to generate a unique random string
         private void generateTransactionID()
         {
-            
+
             string candidate = "";
 
             // Track whether the string is unique from those in file
@@ -383,30 +393,43 @@ namespace Assignment4
             // Variable to track the length of the longest item name
             int maxLength = 0;
 
-            // Width of single space
+            // Width of space
             int spaceWidth = TextRenderer
-                .MeasureText((char)8239 + "", itemVariantListBox.Font).Width;
+                .MeasureText(" ", itemVariantListBox.Font).Width;
 
-            for (int i = 0; i < 60; i++)
+            // Iterate over the list of items
+            for (int i = 0; i < ITEMS.Length; i++)
             {
+                // Obtain the length in pixels of each item
                 int lengthInSpaces = TextRenderer
-                    .MeasureText(ITEMS[i].Item1, itemVariantListBox.Font).Width 
-                    / spaceWidth;
+                    .MeasureText(ITEMS[i].Item1, itemVariantListBox.Font).Width;
+
+                // If this length is higher than the maximum
                 if (maxLength < lengthInSpaces)
+                    // This becomes the new maximum
                     maxLength = lengthInSpaces;
             }
 
+            // Iterate over the list of items
             for (int i = 0; i < ITEMS.Length; i++)
             {
+                // Obtain the length in pixels of each item
                 int lengthInSpaces = TextRenderer
-                    .MeasureText(ITEMS[i].Item1, itemVariantListBox.Font).Width
-                    / spaceWidth;
+                    .MeasureText(ITEMS[i].Item1, itemVariantListBox.Font).Width;
 
-                ITEMS[i] = new Tuple<string, decimal, int, int>(
-                    ITEMS[i].Item1 +
-                    new string((char)8239, maxLength - lengthInSpaces),
-                    ITEMS[i].Item2, ITEMS[i].Item3, ITEMS[i].Item4);
-            }                
+                // Keep looping until length reaches a certain point
+                while (lengthInSpaces < maxLength + 20)
+                {
+                    // Add a space to item name
+                    ITEMS[i] = new Tuple<string, decimal, int, int>(
+                        ITEMS[i].Item1 + ' ', ITEMS[i].Item2,
+                        ITEMS[i].Item3, ITEMS[i].Item4);
+
+                    // Update length of item name
+                    lengthInSpaces = TextRenderer
+                    .MeasureText(ITEMS[i].Item1, itemVariantListBox.Font).Width;
+                }
+            }
 
         }
 
@@ -414,12 +437,9 @@ namespace Assignment4
         private void enterInitialStock()
         {
 
-            // Initialize items of array
-            Array.Fill(initialStock, 0);
-
+            // Possible occurrence of file reading or integer parsing exception
             try
             {
-
                 // Open file
                 StreamReader stockFile = File.OpenText(STOCK_FILE_NAME);
 
@@ -430,19 +450,102 @@ namespace Assignment4
                 stockFile.Close();
 
                 // Store stock values in array
-                for (int i = 0; i < stockArray.Length; i++)
+                for (int i = 0; i < ITEMS.Length; i++)
                 {
                     // Obtain the stock value for the item at this index
                     int stockValue = int.Parse(stockArray[i]);
 
-                    // Save it to the initial stock record
-                    initialStock[i] = stockValue;
-
-                    // Save it to current stock record as well
+                    // Save it to current stock record
                     updateStock(i, stockValue);
                 }
             }
-            catch { }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message, ERROR_MESSAGE,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Method to compare a dd/MM/yyyy date string with one from a timestamp string
+        private Boolean compareDateWithTimestamp(string timestamp, string date)
+        {
+            string[] timeStampData = timestamp.Split(' ')[0].Split('/');
+            string[] dateData = date.Split('/');
+
+            return int.Parse(timeStampData[0]) == int.Parse(dateData[0])
+                && int.Parse(timeStampData[1]) == int.Parse(dateData[1])
+                && int.Parse(timeStampData[2]) == int.Parse(dateData[2]);
+        }
+
+        // Method to return an array for the units sold today
+        private int[] unitsSoldToday()
+        {
+            // Initialize the output variable
+            int[] unitsArray = new int[ITEMS.Length];
+            Array.Fill(unitsArray, 0);
+
+            // Obtain today's date
+            string today = DateTime.Today.ToString(DATE_FORMAT);
+
+            try
+            {
+                // Open transactions file
+                StreamReader transactionsFile = File.OpenText(TRANSACTION_FILE_NAME);
+
+                // Save transaction data to an array
+                string[] transactionsArray = transactionsFile.ReadToEnd().Split((char)13);
+
+                // Close transactions file
+                transactionsFile.Close();
+
+                // Initialize index of reading transaction data
+                int index = 1;
+
+                // Until end of transaction data
+                while (index < transactionsArray.Length - 6)
+                {
+                    // Check if the transaction date matches today's
+                    if (compareDateWithTimestamp(transactionsArray[index], today))
+                    {
+                        // Skip over to the index of the item list
+                        index += 6;
+
+                        // Obtain the items purchased, as an array
+                        string[] items = transactionsArray[index].Split(',');
+
+                        // Iterate over these items' IDs
+                        for (int i = 0; i < items.Length - 1; i++)
+                        {
+                            // Increment counter for that particular item
+                            unitsArray[int.Parse(items[i])]++;
+                        }
+
+                        // Skip over to the index of the next transaction's date
+                        index += 2;
+                    }
+                    else
+                        // Skip over to the index of the next transaction's date
+                        index += 8;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Display exception that occurred
+                MessageBox.Show(ex.Message, ERROR_MESSAGE,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return unitsArray;
+        }
+
+        // Method to return formatted timestamp
+        private string timestamp()
+        {
+            // Get current time
+            string time = DateTime.Now.ToString().Split(' ')[1];
+
+            // Get current date
+            string today = DateTime.Today.ToString(DATE_FORMAT);
+
+            return today + ' ' + time;
         }
 
         public Form1()
@@ -486,12 +589,13 @@ namespace Assignment4
             // Set a tooltip for the "Display Stock Report" button
             toolTip.SetToolTip(stockReportButton, DISPLAY_STOCK_REPORT_TOOLTIP);
 
-            // Set a tooltip for the "Exit" button
+            // Set a tooltip for the "Exit" button`
             toolTip.SetToolTip(exitButton, EXIT_TOOLTIP);
 
             // Save starting stock levels
             enterInitialStock();
 
+            // Adjust spacing in listbox items for presentation
             addSpacesAfterName();
         }
 
@@ -500,7 +604,7 @@ namespace Assignment4
         {
             // Resetting index of item variants list
             itemVariantListBox.SelectedIndex = -1;
-            
+
             // First clearing existing list of item variants
             itemVariantListBox.Items.Clear();
 
@@ -516,7 +620,7 @@ namespace Assignment4
         private void itemVariantListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
-                // Index out of bounds exception occurs when changing categories
+            // Index out of bounds exception occurs when changing categories
             {
                 // Check if there is stock for the selected item variant
                 if (variants[itemVariantListBox.SelectedIndex].Item3 > 0)
@@ -533,7 +637,7 @@ namespace Assignment4
                 // Otherwise, Hide the "Add to Basket" button
                 addToBasketButton.Hide();
             }
-            
+
         }
 
         // Event handler called when pressing the "Add to Basket" button
@@ -597,7 +701,7 @@ namespace Assignment4
         private void deleteItemButton_Click(object sender, EventArgs e)
         {
             try
-                // Index out of bounds exception may occur
+            // Index out of bounds exception may occur
             {
                 // Obtain index of item in basket
                 int basketIndex = basketListBox.SelectedIndex;
@@ -634,7 +738,7 @@ namespace Assignment4
                 {
                     // Hide this button
                     deleteItemButton.Hide();
-                }                    
+                }
 
             }
             catch
@@ -692,7 +796,7 @@ namespace Assignment4
                 // Abort the checkout process
                 return;
             }
-            else if(!new EmailAddressAttribute().IsValid(email) || 
+            else if (!new EmailAddressAttribute().IsValid(email) ||
                 !Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
                 // Display a message requesting that a valid email address be entered
@@ -731,13 +835,13 @@ namespace Assignment4
             }
 
             // Display message box prompting confirmation of purchase
-            DialogResult result = MessageBox.Show(CHECKOUT_MESSAGE_PART_1 + 
-                basket.Count + CHECKOUT_MESSAGE_PART_2 
-                + total.ToString("C") + CHECKOUT_MESSAGE_PART_3, ALERT_MESSAGE, 
+            DialogResult result = MessageBox.Show(CHECKOUT_MESSAGE_PART_1 +
+                basket.Count + CHECKOUT_MESSAGE_PART_2
+                + total.ToString("C") + CHECKOUT_MESSAGE_PART_3, ALERT_MESSAGE,
                 MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             // If user clicks "Yes"
-            if(result == DialogResult.Yes)
+            if (result == DialogResult.Yes)
                 try
                 {
                     // Open transaction record file
@@ -747,7 +851,7 @@ namespace Assignment4
                     outputFile.WriteLine(transactionID);
 
                     // Write current date
-                    outputFile.WriteLine(DateTime.Now);
+                    outputFile.WriteLine(timestamp());
 
                     // Write name
                     outputFile.WriteLine(name);
@@ -832,8 +936,23 @@ namespace Assignment4
         // Event handler called on pressing the "Display Stock Report" button
         private void stockReportButton_Click(object sender, EventArgs e)
         {
+            // Initialize an array representing stock levels at start of day
+            int[] stockBeforeToday = new int[ITEMS.Length];
+
+            // Obtain today's units sold
+            int[] unitsArray = unitsSoldToday();
+
+            // Enter values in this array
+            for (int i = 0; i < ITEMS.Length; i++)
+                // Stock at start of day = Current stock + Units sold today
+                stockBeforeToday[i] = ITEMS[i].Item3 + unitsArray[i];
+
             // Create a form to display stock details
-            new StockReportForm().Show();
+            StockReportForm stockReportForm = 
+                new StockReportForm(ITEMS, stockBeforeToday, timestamp());
+
+            // Show the form
+            stockReportForm.Show();
         }
 
         // Event handler called on pressing the "Clear Search" button
@@ -872,6 +991,7 @@ namespace Assignment4
             // Clear the search results field
             searchResultsListBox.Items.Clear();
 
+            // Possible occurrence of file read or integer parsing exceptions
             try
             {
                 // Open transaction record file
@@ -902,19 +1022,8 @@ namespace Assignment4
                     string recordDate = fileData[index++];
 
                     // Variable to track if the current record is a match
-                    Boolean isMatch = false;
-
-                    if (isSearchingByID)
-                        isMatch = recordID == searchTerm;
-                    else
-                    {
-                        string[] recordDateArray = recordDate.Split(' ')[0].Split('/');
-                        string[] searchDateArray = searchTerm.Split('/');
-
-                        isMatch = int.Parse(recordDateArray[0]) == int.Parse(searchDateArray[0])
-                            && int.Parse(recordDateArray[1]) == int.Parse(searchDateArray[1])
-                            && int.Parse(recordDateArray[2]) == int.Parse(searchDateArray[2]);
-                    }
+                    Boolean isMatch = isSearchingByID ? searchTerm == recordID :
+                        compareDateWithTimestamp(recordDate, searchTerm);
 
                     // Check if search term matches ID or date, whichever is applicable
                     if (isMatch)
@@ -938,7 +1047,7 @@ namespace Assignment4
                         searchResultsListBox.Items.Add(PHONE_PREFIX + fileData[index++]);
 
                         // Print the item total
-                        searchResultsListBox.Items.Add(ITEM_TOTAL_PREFIX + 
+                        searchResultsListBox.Items.Add(ITEM_TOTAL_PREFIX +
                             decimal.Parse(fileData[index++]).ToString("C"));
 
                         // Print the item count
@@ -968,21 +1077,112 @@ namespace Assignment4
                     else
                         // Skip the next 6 lines
                         index += 6;
-            }
+                }
 
-            // In case of no match being found
-            if (!matchFound)
+                // In case of no match being found
+                if (!matchFound)
                     // Indicate such
                     searchResultsListBox.Items.Add(NO_RESULTS_FOUND_MESSAGE);
 
             }
             // In case of exception
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 // Display message detailing cause of exception
-                MessageBox.Show(ex.Message, ERROR_MESSAGE, 
+                MessageBox.Show(ex.Message, ERROR_MESSAGE,
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } 
+            }
         }
+
+        // Event handler triggerd on pressing the "Generate Sales Report" button
+        private void salesReportButton_Click(object sender, EventArgs e)
+        {
+            // Possible occurrence of file I/O or integer parsing exceptions
+            try
+            {
+
+                // Open sales report file
+                StreamWriter salesReportFile = File.AppendText(SALES_REPORT_FILE_NAME);
+
+                // Write heading
+                salesReportFile.WriteLine(TIMESTAMP_PREFIX + timestamp());
+
+                // Obtain today's sales
+                int[] unitsArray = unitsSoldToday();
+
+                // Initialize variable for maximum item name length
+                int maxLength = 0;
+
+                // Iterate over list of items
+                foreach (Tuple<string, decimal, int, int> item in ITEMS)
+                {
+                    // Obtain trimmed item name
+                    string itemName = item.Item1.Trim();
+
+                    // If item name is longer than current maximum
+                    if (itemName.Length > maxLength)
+                        // Update maximum
+                        maxLength = itemName.Length;
+                }
+
+                // Iterate over list of items
+                foreach (Tuple<string, decimal, int, int> item in ITEMS)
+                {
+                    // Obtain trimmed item name
+                    string itemName = item.Item1.Trim();
+
+                    // Identify extra spacing required
+                    string spacing = new string(' ', maxLength + 4 - itemName.Length);
+
+                    // Initialize line to be written
+                    string line = ITEM_NAME_PREFIX + itemName + spacing;
+                    line += UNITS_SOLD_PREFIX + unitsArray[item.Item4];
+                    salesReportFile.WriteLine(line);
+                }
+
+                // Add an empty line space
+                salesReportFile.WriteLine("\n");
+
+                // Close the sales report file
+                salesReportFile.Close();
+
+                // Exclaim success
+                MessageBox.Show(GENERATE_SALES_SUCCESS);
+
+            }
+            catch (Exception ex)
+            {
+                // Display message explaining the exception
+                MessageBox.Show(ex.Message, ERROR_MESSAGE,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Form close event
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Possible occurrence of file I/O exception
+            try
+            {
+                // Open file for stock data
+                StreamWriter stockFile = File.CreateText(STOCK_FILE_NAME);
+
+                // Enter stock amount for each item
+                foreach (Tuple<string, decimal, int, int> item in ITEMS)
+                    stockFile.WriteLine(item.Item3);
+
+                // Close file
+                stockFile.Close();
+            }
+            catch(Exception ex)
+            {
+                // Display exception that occurs
+                MessageBox.Show(ex.Message, ERROR_MESSAGE,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //
+
     }
 }       

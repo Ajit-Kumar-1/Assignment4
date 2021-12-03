@@ -60,27 +60,24 @@
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.transactionDateRadioButton = new System.Windows.Forms.RadioButton();
             this.transactionIDRadioButton = new System.Windows.Forms.RadioButton();
-            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.passwordLabel = new System.Windows.Forms.Label();
-            this.passwordTextBox = new System.Windows.Forms.TextBox();
+            this.passwordPanel = new System.Windows.Forms.Panel();
             this.passwordButton = new System.Windows.Forms.Button();
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
+            this.passwordLabel = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.mainPanel.SuspendLayout();
             this.customerInformationGroupBox.SuspendLayout();
             this.itemSelectionGroupBox.SuspendLayout();
             this.basketGroupBox.SuspendLayout();
             this.buttonGroupBox.SuspendLayout();
             this.searchGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.passwordPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // mainPanel
             // 
-            this.mainPanel.Controls.Add(this.panel1);
             this.mainPanel.Controls.Add(this.customerInformationGroupBox);
             this.mainPanel.Controls.Add(this.itemSelectionGroupBox);
             this.mainPanel.Controls.Add(this.basketGroupBox);
@@ -406,29 +403,35 @@
             this.transactionIDRadioButton.Text = "By Transaction ID";
             this.transactionIDRadioButton.UseVisualStyleBackColor = true;
             // 
-            // fileSystemWatcher1
+            // passwordPanel
             // 
-            this.fileSystemWatcher1.EnableRaisingEvents = true;
-            this.fileSystemWatcher1.SynchronizingObject = this;
+            this.passwordPanel.Controls.Add(this.passwordButton);
+            this.passwordPanel.Controls.Add(this.passwordTextBox);
+            this.passwordPanel.Controls.Add(this.passwordLabel);
+            this.passwordPanel.Controls.Add(this.pictureBox1);
+            this.passwordPanel.Location = new System.Drawing.Point(4, -1);
+            this.passwordPanel.Name = "passwordPanel";
+            this.passwordPanel.Size = new System.Drawing.Size(1454, 779);
+            this.passwordPanel.TabIndex = 6;
             // 
-            // panel1
+            // passwordButton
             // 
-            this.panel1.Controls.Add(this.passwordButton);
-            this.panel1.Controls.Add(this.passwordTextBox);
-            this.panel1.Controls.Add(this.passwordLabel);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(-3, -1);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1454, 779);
-            this.panel1.TabIndex = 5;
+            this.passwordButton.Location = new System.Drawing.Point(669, 525);
+            this.passwordButton.Name = "passwordButton";
+            this.passwordButton.Size = new System.Drawing.Size(150, 46);
+            this.passwordButton.TabIndex = 3;
+            this.passwordButton.Text = "Sign In";
+            this.passwordButton.UseVisualStyleBackColor = true;
+            this.passwordButton.Click += new System.EventHandler(this.passwordButton_Click);
             // 
-            // pictureBox1
+            // passwordTextBox
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(583, 153);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(292, 258);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.passwordTextBox.Location = new System.Drawing.Point(583, 457);
+            this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.PasswordChar = '*';
+            this.passwordTextBox.Size = new System.Drawing.Size(378, 39);
+            this.passwordTextBox.TabIndex = 2;
+            this.passwordTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.passwordTextBox_KeyPress);
             // 
             // passwordLabel
             // 
@@ -439,28 +442,20 @@
             this.passwordLabel.TabIndex = 1;
             this.passwordLabel.Text = "Enter password:";
             // 
-            // passwordTextBox
+            // pictureBox1
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(583, 457);
-            this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.PasswordChar = '*';
-            this.passwordTextBox.Size = new System.Drawing.Size(378, 39);
-            this.passwordTextBox.TabIndex = 2;
-            // 
-            // passwordButton
-            // 
-            this.passwordButton.Location = new System.Drawing.Point(669, 525);
-            this.passwordButton.Name = "passwordButton";
-            this.passwordButton.Size = new System.Drawing.Size(150, 46);
-            this.passwordButton.TabIndex = 3;
-            this.passwordButton.Text = "Sign In";
-            this.passwordButton.UseVisualStyleBackColor = true;
+            this.pictureBox1.Location = new System.Drawing.Point(583, 153);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(292, 258);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1463, 1463);
+            this.ClientSize = new System.Drawing.Size(1463, 777);
+            this.Controls.Add(this.passwordPanel);
             this.Controls.Add(this.mainPanel);
             this.Name = "Form1";
             this.Text = "Electronics Store";
@@ -476,9 +471,8 @@
             this.buttonGroupBox.PerformLayout();
             this.searchGroupBox.ResumeLayout(false);
             this.searchGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.passwordPanel.ResumeLayout(false);
+            this.passwordPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -519,7 +513,7 @@
         private TextBox nameTextBox;
         private Label nameLabel;
         private ToolTip toolTip;
-        private Panel panel1;
+        private Panel passwordPanel;
         private PictureBox pictureBox1;
         private Button passwordButton;
         private TextBox passwordTextBox;

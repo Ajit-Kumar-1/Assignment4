@@ -8,6 +8,9 @@ namespace Assignment4
         // PASSWORD
         private const string PASSWORD = "password";
 
+        // Password attempts remaining
+        private int passwordAttempts = 4;
+
         // List of items
         private Tuple<string, decimal, int, int>[] ITEMS =
             new Tuple<string, decimal, int, int>[60] {
@@ -88,6 +91,16 @@ namespace Assignment4
 
         // Error message
         private const string ERROR_MESSAGE = "Error";
+
+        // Warning message
+        private const string WARNING_MESSAGE = "Warning";
+
+        // Wrong password message
+        private const string WRONG_PASSWORD_MESSAGE_PART_1 = "Wrong Password. You have ";
+        private const string WRONG_PASSWORD_MESSAGE_PART_2 = " attempt(s) left.";
+
+        // Message indicating that allowed chances for entering the correct password are exhausted
+        private const string NO_MORE_ATTEMPTS_MESSAGE = "Locked out; too many failed attempts.";
 
         // Message indicating that a sales report was generated successfully
         private const string GENERATE_SALES_SUCCESS =
@@ -1180,6 +1193,72 @@ namespace Assignment4
                 MessageBox.Show(ex.Message, ERROR_MESSAGE,
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        // Method called when attempting to submit password
+        private void enterPassword()
+        {
+            // If out of password attempts
+            if (passwordAttempts <= 0)
+            {
+                // Show message indicating such
+                MessageBox.Show(NO_MORE_ATTEMPTS_MESSAGE, ERROR_MESSAGE,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Quit the application
+                Application.Exit();
+            }
+
+            // If password entered is correct
+            if (passwordTextBox.Text == PASSWORD)
+            {
+                // Set form height to accommodate main screen
+                this.Height = mainPanel.Height + 60;
+
+                // Hide the password screen
+                passwordPanel.Hide();
+
+                // Show the main screen
+                mainPanel.Show();
+            }
+            // If wrong password entered
+            else
+            {
+                // Decrement number of remaining allowed attempts
+                passwordAttempts--;
+
+                // Display warning message
+                MessageBox.Show(WRONG_PASSWORD_MESSAGE_PART_1 +
+                    passwordAttempts + WRONG_PASSWORD_MESSAGE_PART_2,
+                    WARNING_MESSAGE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Assign focus to the password textbox
+                passwordTextBox.Focus();
+
+                // If out of password attempts
+                if (passwordAttempts <= 0)
+                {
+                    // Show message indicating such
+                    MessageBox.Show(NO_MORE_ATTEMPTS_MESSAGE, ERROR_MESSAGE,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    // Quit the application
+                    Application.Exit();
+                }
+
+            }
+        }
+
+        // Event handler triggered on pressing the "Sign In" button
+        private void passwordButton_Click(object sender, EventArgs e)
+        {
+            enterPassword();
+        }
+
+        // Event handler triggered on pressing a key when focused on the password textbox
+        private void passwordTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            enterPassword();
         }
 
         //
